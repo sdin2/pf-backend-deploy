@@ -9,7 +9,7 @@ async function getNewsApi() {
   );
   const array = newsApi.data.map((e) => {
     return {
-      id: e._id,
+      id: e.id,
       title: e.title,
       short_description: e.short_description,
       main_image: e.main_image,
