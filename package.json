@@ -15,12 +15,12 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
-    "sequelize": "^6.21.4"
+    "sequelize": "^6.21.4",
+    "nodemon": "^2.0.6"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
-    "nodemon": "^2.0.6",
     "supertest": "^6.0.1",
     "supertest-session": "^4.1.0"
   },
@@ -28,7 +28,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node .",
+    "start": "nodemon -L",
     "test": "mocha -w ./tests/**/*.spec.js"
   },
   "repository": {
