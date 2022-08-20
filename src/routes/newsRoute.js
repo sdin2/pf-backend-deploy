@@ -8,14 +8,10 @@ const { API_KEY } = process.env;
 const router = Router();
 
 router.get("/", async (req, res, next) => {
-  const id = req.params.id;
   const title = req.query.title;
 
   let allNews = await getAllNews();
-  if (id) {
-    let newId = allNews.filter((e) => e.id === id);
-    res.status(200).send(newId);
-  } else if (title) {
+  if (title) {
     let newsTitle = allNews.filter((el) =>
       el.title.toLowerCase().includes(title.toLowerCase())
     );
@@ -23,6 +19,13 @@ router.get("/", async (req, res, next) => {
       ? res.status(200).json(newsTitle)
       : res.status(500).json("No se encontraron resultados");
   } else res.status(200).json(allNews);
+});
+
+router.get("/:id", async (req, res, next) => {
+  const id = req.params.id;
+  let allNews = await getAllNews();
+  let newsId = allNews.filter((e) => e.id == id);
+  res.status(200).send(newsId);
 });
 
 router.post("/", async (req, res, next) => {

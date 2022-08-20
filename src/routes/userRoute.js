@@ -32,10 +32,12 @@ router.get("/", async (req, res, next) => {
 });
 
 // get a user
-router.get("/:id", (req, res, next) => {
-  const { id } = req.params;
+router.get("/:id", async (req, res, next) => {
+  const id = req.params.id;
+  console.log(id);
   try {
-    const userData = User.findByPk(id);
+    const userData = await User.findByPk(id);
+    console.log(userData);
     res.send(userData);
   } catch (error) {
     next(error);
