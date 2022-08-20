@@ -7,13 +7,23 @@ const { User } = require("../db.js");
 router.post("/", async (req, res, next) => {
   const user = req.body;
   try {
+    const userData = await User.findAll();
     if (user.email) {
-      const createUser = await User.findOrCreate({
-        where: {
-          email: user.email,
-          nickname: user.nickname,
-        },
-      });
+      if (userData.filter((e) => e.nickname === user.nickname).length === 0) {
+        const createUser = await User.findOrCreate({
+          where: {
+            email: user.email,
+            nickname: user.nickname,
+          },
+        });
+      } else {
+        const createUser = await User.findOrCreate({
+          where: {
+            email: user.email,
+            nickname: user.nickname + "123",
+          },
+        });
+      }
       res.send(createUser);
     } else res.status(400).send("user null");
   } catch (error) {
