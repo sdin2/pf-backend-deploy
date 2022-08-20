@@ -23,8 +23,8 @@ router.post("/", async (req, res, next) => {
             nickname: user.nickname + "123",
           },
         });
+        res.send(createUser);
       }
-      res.send(createUser);
     } else res.status(400).send("user null");
   } catch (error) {
     next(error);
