@@ -7,10 +7,10 @@ const { User } = require("../db.js");
 router.post("/", async (req, res, next) => {
   const user = req.body;
   try {
-    if (user.name) {
+    if (user.email) {
       const createUser = await User.findOrCreate({
         where: {
-          email: user.name,
+          email: user.email,
           nickname: user.nickname,
         },
       });
