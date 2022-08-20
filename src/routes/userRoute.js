@@ -24,8 +24,14 @@ router.post("/", async (req, res, next) => {
 // get all users
 router.get("/", async (req, res, next) => {
   try {
+    let email = req.query.email;
     const userData = await User.findAll();
-    res.send(userData);
+    if (email) {
+      const userByEmail = userData.filter((e) => e.email === email);
+      res.status(200).send(userByEmail);
+    } else {
+      res.send(userData);
+    }
   } catch (error) {
     next(error);
   }
