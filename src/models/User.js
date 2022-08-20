@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
     },
     password: {
       type: DataTypes.STRING,
-      allownull: false,
+      allownull: true,
     },
     matched_users: {
       type: DataTypes.JSON,

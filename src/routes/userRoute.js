@@ -5,16 +5,17 @@ const { User } = require("../db.js");
 
 // create user
 router.post("/", async (req, res, next) => {
-  const { email, nickname, img, password, favoriteGames } = req.body;
+  const user = req.body;
   try {
-    const createUser = await User.create({
-      email,
-      nickname,
-      img,
-      password,
-      favoriteGames,
-    });
-    res.send(createUser);
+    if (user.name) {
+      const createUser = await User.findOrCreate({
+        where: {
+          email: user.name,
+          nickname: user.nickname,
+        },
+      });
+      res.send(createUser);
+    } else res.status(400).send("user null");
   } catch (error) {
     next(error);
   }
