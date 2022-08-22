@@ -17,7 +17,7 @@ router.get("/", async (req, res, next) => {
     );
     newsTitle.length
       ? res.status(200).json(newsTitle)
-      : res.status(500).json("No se encontraron resultados");
+      : res.status(200).json("No se encontraron resultados");
   } else res.status(200).json(allNews);
 });
 
@@ -25,7 +25,9 @@ router.get("/:id", async (req, res, next) => {
   const id = req.params.id;
   let allNews = await getAllNews();
   let newsId = allNews.filter((e) => e.id == id);
-  res.status(200).send(newsId);
+  newsId.length > 0
+    ? res.status(200).send(newsId)
+    : res.status(200).send("Not found");
 });
 
 router.post("/", async (req, res, next) => {

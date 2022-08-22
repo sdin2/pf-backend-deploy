@@ -51,8 +51,8 @@ module.exports = (sequelize) => {
       defaultValue: [],
     },
     servers: {
-      type: DataTypes.JSON,
-      defaultValue: [],
+      type: DataTypes.STRING,
+      defaultValue: "",
     },
     missionCompleted: {
       type: DataTypes.JSON,
