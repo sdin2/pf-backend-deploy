@@ -5,8 +5,19 @@ const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const { CORS_URL } = process.env;
 require("./db.js");
+const Stripe = require("stripe");
 
 const server = express();
+
+const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SECRET,
+  baseURL: process.env.BASEURL,
+  clientID: process.env.CLIENTID,
+  issuerBaseURL: process.env.ISSUREURL,
+};
 
 server.name = "API";
 
@@ -26,6 +37,20 @@ server.use((req, res, next) => {
 });
 
 server.use("/", routes);
+server.post("/api/checkout", async (req, res) => {
+  const { id, amount } = req.body;
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount,
+      currency: "USD",
+      payment_method: id,
+      confirm: true,
+    });
+    res.status(200).json(payment);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // Error catching endware.
 server.use((err, req, res, next) => {
