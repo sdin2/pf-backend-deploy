@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { Router } = require("express");
 // const { Game } = require("../db");
-const { getAllGames } = require("../controllers/GamesController");
+const { getAllGames, getGamesDB } = require("../controllers/GamesController");
 require("dotenv").config();
 const { API_KEY_GAMES } = process.env;
 
@@ -25,7 +25,7 @@ router.get("/", async (req, res, next) => {
         ? res.status(200).send(videogameByName)
         : res.status(200).send("Not Found");
     } else {
-      let videogames = await getAllGames();
+      let videogames = await getGamesDB();
       res.status(200).send(videogames);
     }
   } catch (err) {
