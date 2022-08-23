@@ -1,7 +1,7 @@
 const { default: axios } = require("axios");
 const express = require("express");
 const router = express.Router();
-const { User } = require("../db.js");
+const { User, Forum } = require("../db.js");
 
 // create user
 router.post("/", async (req, res, next) => {
@@ -35,7 +35,9 @@ router.post("/", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     let email = req.query.email;
-    const userData = await User.findAll();
+    const userData = await User.findAll({
+      include: Forum,
+    });
     if (email) {
       const userByEmail = userData.filter((e) => e.email === email);
       res.status(200).send(userByEmail);

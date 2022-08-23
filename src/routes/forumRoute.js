@@ -1,16 +1,20 @@
 const { axios } = require("axios");
 const express = require("express");
 const router = express.Router();
-const { Forum } = require("../db.js");
+const { Forum, User } = require("../db.js");
 
 router.post("/", async (req, res, next) => {
+  const forum = req.body;
   try {
-    const forum = req.body;
+    let userDb = await User.findOne({
+      where: { nickname: forum.nickname },
+    });
     const createForum = await Forum.create({
       title: forum.title,
       text: forum.text,
+      userId: userDb.dataValues.id,
     });
-    res.send(createForum);
+    res.send("Posteo completado");
   } catch (error) {
     next(error);
   }
@@ -19,7 +23,9 @@ router.post("/", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     let title = req.query.title;
-    const forumData = await Forum.findAll();
+    const forumData = await Forum.findAll({
+      include: User,
+    });
     if (title) {
       const postBytitle = forumData.filter((e) => e.title.includes(title));
       res.status(200).send(postBytitle);
