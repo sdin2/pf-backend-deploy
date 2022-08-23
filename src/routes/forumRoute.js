@@ -24,7 +24,22 @@ router.get("/", async (req, res, next) => {
   try {
     let title = req.query.title;
     const forumData = await Forum.findAll({
-      include: User,
+      include: {
+        model: User,
+        attributes: [
+          "nickname",
+          "email",
+          "img",
+          "deleteFlag",
+          "bannedFlag",
+          "matched_users",
+          "favoriteGames",
+          "servers",
+          "isAdmin",
+          "rating",
+          "plan",
+        ],
+      },
     });
     if (title) {
       const postBytitle = forumData.filter((e) => e.title.includes(title));

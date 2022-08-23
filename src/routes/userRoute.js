@@ -36,7 +36,10 @@ router.get("/", async (req, res, next) => {
   try {
     let email = req.query.email;
     const userData = await User.findAll({
-      include: Forum,
+      include: {
+        model: Forum,
+        attributes: ["id", "title", "deleteFlag"],
+      },
     });
     if (email) {
       const userByEmail = userData.filter((e) => e.email === email);
