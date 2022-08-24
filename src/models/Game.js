@@ -3,16 +3,10 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define("game", {
     id: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER,
       primaryKey: true,
+      allowNull: false,
     },
-    // id: {
-    //   type: DataTypes.UUID,
-    //   defaultValue: DataTypes.UUIDV4,
-    //   allowNull: false,
-    //   primaryKey: true,
-    // },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
