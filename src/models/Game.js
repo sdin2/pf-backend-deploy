@@ -4,12 +4,13 @@ module.exports = (sequelize) => {
   sequelize.define("game", {
     apiId: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
+      allowNull: false,
     },
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
