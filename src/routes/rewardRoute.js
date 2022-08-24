@@ -14,6 +14,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    let getRewardById = await Reward.findByPk(id);
+    res.send(getRewardById);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   const { title, price, image, recompenseType, available } = req.body;
 
