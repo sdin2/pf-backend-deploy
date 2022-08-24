@@ -52,7 +52,7 @@ async function saveAllGamesInDb() {
       where: {
         name: e.name,
         img: e.img,
-        apiId: e.id.toString(),
+        id: e.id.toString(),
       },
     });
   });
