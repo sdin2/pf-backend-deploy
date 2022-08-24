@@ -23,9 +23,9 @@ router.post("/", async (req, res, next) => {
             nickname: user.nickname + "123",
           },
         });
-        res.send(createUser);
       }
-    } else res.status(400).send("user null");
+      res.send("user created");
+    } else res.status(200).send("user already exist!");
   } catch (error) {
     next(error);
   }
