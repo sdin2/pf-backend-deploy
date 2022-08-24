@@ -12,7 +12,7 @@ async function getAllGames() {
   );
   let gamesFilter = gamesAPI.data.results.map((e) => {
     return {
-      apiId: e.id,
+      id: e.id,
       name: e.name,
       img: e.background_image,
     };
@@ -23,7 +23,7 @@ async function getAllGames() {
     gamesAPI = await axios.get(url);
     let gamesFilter = gamesAPI.data.results.map((e) => {
       return {
-        apiId: e.id,
+        id: e.id,
         name: e.name,
         img: e.background_image,
       };
@@ -52,7 +52,7 @@ async function saveAllGamesInDb() {
       where: {
         name: e.name,
         img: e.img,
-        apiId: e.apiId,
+        apiId: e.id,
       },
     });
   });
