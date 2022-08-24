@@ -2,7 +2,6 @@ const axios = require("axios");
 require("dotenv").config();
 const { API_KEY_GAMES } = process.env;
 const { Game } = require("../db");
-const { all } = require("../routes");
 
 async function getAllGames() {
   let gamesAPI;
