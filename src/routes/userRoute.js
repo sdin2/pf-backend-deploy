@@ -7,9 +7,11 @@ const { User, Forum } = require("../db.js");
 router.post("/", async (req, res, next) => {
   const user = req.body;
   try {
-    const userData = await User.findAll();
+    const userData = await User.findOne({
+      where: { nickname: user.nickname },
+    });
     if (user.email) {
-      if (userData.filter((e) => e.nickname === user.nickname).length === 0) {
+      if (!userData) {
         const createUser = await User.findOrCreate({
           where: {
             email: user.email,
@@ -25,7 +27,7 @@ router.post("/", async (req, res, next) => {
         });
       }
       res.send("user created");
-    } else res.status(200).send("user already exist!");
+    } else res.status(200).send("no se pudo crear el usuario");
   } catch (error) {
     next(error);
   }
