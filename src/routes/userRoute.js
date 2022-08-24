@@ -22,7 +22,8 @@ router.post("/", async (req, res, next) => {
         const createUser = await User.findOrCreate({
           where: {
             email: user.email,
-            nickname: user.nickname + "123",
+            //1 1+123 1+123
+            nickname: user.email,
           },
         });
       }
