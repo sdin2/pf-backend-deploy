@@ -23,7 +23,7 @@ async function getAllGames() {
     gamesAPI = await axios.get(url);
     let gamesFilter = gamesAPI.data.results.map((e) => {
       return {
-        id: e.id,
+        // id: e.id,
         name: e.name,
         img: e.background_image,
       };
