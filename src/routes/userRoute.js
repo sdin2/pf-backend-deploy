@@ -78,7 +78,7 @@ router.put("/:id", async (req, res, next) => {
     if (allBody.delete === true) {
       allBody.favoriteGames = [userData.favoriteGames, allBody.favoriteGames];
       allBody.favoriteGames.flat(Infinity);
-    } else {
+    } else if (allBody.delete === false) {
       allBody.favoriteGames = userData.favoriteGames.filter(
         (e) => !e.allBody.favoriteGames
       );
