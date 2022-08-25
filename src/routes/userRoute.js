@@ -75,10 +75,10 @@ router.put("/:id", async (req, res, next) => {
   const allBody = req.body;
   try {
     let userData = await User.findByPk(id);
-    if (allBody.delete === true) {
-      allBody.favoriteGames = [userData.favoriteGames, allBody.favoriteGames];
-      allBody.favoriteGames.flat(Infinity);
-    } else if (allBody.delete === false) {
+    if (allBody.delete === false) {
+      userData.favoriteGames.push(allBody.favoriteGames);
+      // allBody.favoriteGames.flat(Infinity);
+    } else if (allBody.delete === true) {
       allBody.favoriteGames = userData.favoriteGames.filter(
         (e) => !e.allBody.favoriteGames
       );
@@ -92,7 +92,7 @@ router.put("/:id", async (req, res, next) => {
       password: allBody.password,
       matched_users: allBody.matched_users,
       coins: allBody.coins,
-      favoriteGames: allBody.favoriteGames,
+      favoriteGames: userData.favoriteGames,
       servers: allBody.servers,
       missionCompleted: allBody.missionCompleted,
       isAdmin: allBody.isAdmin,
