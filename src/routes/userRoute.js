@@ -74,6 +74,7 @@ router.put("/:id", async (req, res, next) => {
   const id = req.params.id;
   const allBody = req.body;
   try {
+    let userData = await User.findByPk(id);
     if (allBody.delete === true) {
       allBody.favoriteGames = [userData.favoriteGames, allBody.favoriteGames];
       allBody.favoriteGames.flat(Infinity);
