@@ -5,7 +5,7 @@ const { saveAllGamesInDb } = require("./src/controllers/GamesController");
 
 let port = PORT || 3001;
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync().then(() => {
   server.listen(PORT, () => {
     saveAllGamesInDb();
     console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
