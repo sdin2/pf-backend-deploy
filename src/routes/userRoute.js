@@ -7,13 +7,10 @@ const { User, Forum } = require("../db.js");
 router.post("/", async (req, res, next) => {
   const user = req.body;
   try {
-    if (!user.nickname) {
-      res.send("no hay usuario");
-    }
-    const userData = await User.findOne({
-      where: { nickname: user.nickname },
-    });
-    if (user.email) {
+    if (user.email && user.nickname) {
+      const userData = await User.findOne({
+        where: { nickname: user.nickname },
+      });
       if (!userData) {
         const createUser = await User.findOrCreate({
           where: {
@@ -41,6 +38,7 @@ router.post("/", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     let email = req.query.email;
+    console.log(email);
     const userData = await User.findAll({
       include: {
         model: Forum,
