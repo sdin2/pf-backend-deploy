@@ -73,6 +73,7 @@ router.get("/:id", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   const id = req.params.id;
   const allBody = req.body;
+  console.log(id, allBody);
   try {
     let userData = await User.findByPk(id);
     if (allBody.delete === false) {
