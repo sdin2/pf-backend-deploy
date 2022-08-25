@@ -7,19 +7,19 @@ const { User, Forum } = require("../db.js");
 router.post("/", async (req, res, next) => {
   const user = req.body;
   try {
-    if (user.email && user.nickname) {
+    if (user.nickname) {
       const userData = await User.findOne({
         where: { nickname: user.nickname },
       });
       if (!userData) {
-        const createUser = await User.findOrCreate({
+        await User.findOrCreate({
           where: {
             email: user.email,
             nickname: user.nickname,
           },
         });
       } else {
-        const createUser = await User.findOrCreate({
+        await User.findOrCreate({
           where: {
             email: user.email,
             //1 1+123 1+123
@@ -28,9 +28,9 @@ router.post("/", async (req, res, next) => {
         });
       }
       res.send("user created");
-    } else res.status(200).send("no se pudo crear el usuario");
+    } else res.send("fail to create a user");
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 });
 
