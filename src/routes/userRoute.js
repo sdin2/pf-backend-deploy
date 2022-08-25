@@ -7,7 +7,7 @@ const { User, Forum } = require("../db.js");
 router.post("/", async (req, res, next) => {
   const user = req.body;
   try {
-    if (user.nickname === undefined) {
+    if (!user.nickname) {
       res.send("no hay usuario");
     }
     const userData = await User.findOne({
