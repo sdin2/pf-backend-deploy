@@ -78,11 +78,11 @@ router.put("/:id", async (req, res, next) => {
     let userData = await User.findByPk(id);
     console.log("userData", userData, "fin");
     if (allBody.delete === false) {
-      userData.favoriteGames.push(allBody.favoriteGames);
+      userData.favoriteGames = [...userData.favoriteGames, allBody.favorite];
       // allBody.favoriteGames.flat(Infinity);
     } else if (allBody.delete === true) {
-      allBody.favoriteGames = userData.favoriteGames.filter(
-        (e) => !e.allBody.favoriteGames
+      userData.favoriteGames = userData.favoriteGames.filter(
+        (e) => !allBody.favorite
       );
     }
     console.log("userData", userData.favoriteGames, "fin");
