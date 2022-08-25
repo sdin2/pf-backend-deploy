@@ -74,7 +74,14 @@ router.put("/:id", async (req, res, next) => {
   const id = req.params.id;
   const allBody = req.body;
   try {
-    let userData = await User.findByPk(id);
+    if (allBody.delete === true) {
+      allBody.favoriteGames = [userData.favoriteGames, allBody.favoriteGames];
+      allBody.favoriteGames.flat(Infinity);
+    } else {
+      allBody.favoriteGames = userData.favoriteGames.filter(
+        (e) => !e.allBody.favoriteGames
+      );
+    }
     await userData.update({
       nickname: allBody.nickname,
       email: allBody.email,
@@ -91,6 +98,7 @@ router.put("/:id", async (req, res, next) => {
       rating: allBody.rating,
       plan: allBody.plan,
     });
+
     res.status(200).json(userData);
   } catch (error) {
     next(error);
