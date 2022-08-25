@@ -100,7 +100,7 @@ router.put("/:id", async (req, res, next) => {
       plan: allBody.plan,
     });
 
-    res.status(200).json(userData);
+    res.status(200).json("user updated");
   } catch (error) {
     next(error);
   }
