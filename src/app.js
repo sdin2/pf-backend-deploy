@@ -45,19 +45,19 @@ server.use((req, res, next) => {
 
 server.use("/", routes);
 server.post("/api/checkout", async (req, res) => {
-  const { id, amount, dataUser } = req.body;
-  console.log("id", id, "ammount", amount, "dataUser", dataUser, "fin");
   try {
+    const { id, amount, dataUser } = req.body;
+    console.log("id", id, "ammount", amount, "dataUser", dataUser, "fin");
     const payment = await stripe.paymentIntents.create({
       amount,
       currency: "USD",
       payment_method: id,
       confirm: true,
     });
-    let user = await axios.get(
-      `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`
-    );
-    console.log("userData", user.data);
+    // let user = await axios.get(
+    //   `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`
+    // );
+    // console.log("userData", user.data);
     axios.put(
       `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`,
       {
