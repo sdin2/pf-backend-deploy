@@ -11,14 +11,14 @@ const server = express();
 const axios = require("axios");
 
 const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
-const config = {
-  authRequired: false,
-  auth0Logout: false,
-  secret: process.env.SECRET,
-  baseURL: process.env.BASEURL,
-  clientID: process.env.CLIENTID,
-  issuerBaseURL: process.env.ISSUREURL,
-};
+// const config = {
+//   authRequired: false,
+//   auth0Logout: false,
+//   secret: process.env.SECRET,
+//   baseURL: process.env.BASEURL,
+//   clientID: process.env.CLIENTID,
+//   issuerBaseURL: process.env.ISSUREURL,
+// };
 
 server.name = "API";
 
