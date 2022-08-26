@@ -64,7 +64,10 @@ router.put("/:id", async (req, res, next) => {
   const allBody = req.body;
   try {
     let userData = await User.findByPk(id);
-    if (allBody.delete === false) {
+    if (
+      allBody.delete === false &&
+      !userData.favoriteGames.some((e) => e === allBody.favorite)
+    ) {
       userData.favoriteGames = [...userData.favoriteGames, allBody.favorite];
     } else if (allBody.delete === true) {
       userData.favoriteGames = userData.favoriteGames.filter(
