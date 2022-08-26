@@ -8,11 +8,12 @@ require("./db.js");
 const Stripe = require("stripe");
 const cors = require("cors");
 const server = express();
+const { axios } = require("axios");
 
 const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
 const config = {
   authRequired: false,
-  auth0Logout: true,
+  auth0Logout: false,
   secret: process.env.SECRET,
   baseURL: process.env.BASEURL,
   clientID: process.env.CLIENTID,
