@@ -52,6 +52,7 @@ server.post("/api/checkout", async (req, res) => {
       payment_method: id,
       confirm: true,
     });
+    console.log("id", id, "ammount", amount, "dataUser", dataUser, "fin");
     let user = await axios.get(
       `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`
     );
