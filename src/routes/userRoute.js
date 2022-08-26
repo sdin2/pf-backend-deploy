@@ -28,6 +28,7 @@ router.post("/", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     let email = req.query.email ? req.query.email : req.body.email;
+    let nickname = req.query.nickname ? req.query.nickname : req.body.nickname;
     const userData = await User.findAll({
       include: {
         model: Forum,
@@ -37,9 +38,10 @@ router.get("/", async (req, res, next) => {
     if (email) {
       const userByEmail = userData.filter((e) => e.email === email);
       res.status(200).send(userByEmail);
-    } else {
-      res.send(userData);
-    }
+    } else if (nickname) {
+      const userByEmail = userData.filter((e) => e.email === email);
+      res.status(200).send(userByEmail);
+    } else res.send(userData);
   } catch (error) {
     next(error);
   }
