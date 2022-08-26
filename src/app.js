@@ -8,7 +8,7 @@ require("./db.js");
 const Stripe = require("stripe");
 const cors = require("cors");
 const server = express();
-const { axios } = require("axios");
+const axios = require("axios");
 
 const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
 const config = {
@@ -54,7 +54,10 @@ server.post("/api/checkout", async (req, res) => {
       payment_method: id,
       confirm: true,
     });
-
+    let user = await axios.get(
+      `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`
+    );
+    console.log("userData", user.data);
     axios.put(
       `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`,
       {
