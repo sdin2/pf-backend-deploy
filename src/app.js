@@ -37,13 +37,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use(
-  "/",
-  routes,
-  cors({
-    origin: ["http://localhost:3000", "https://checkout.stripe.com"],
-  })
-);
+server.use("/", routes);
 server.post("/api/checkout", async (req, res) => {
   const { id, amount, dataUser } = req.body;
   try {
