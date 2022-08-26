@@ -5,12 +5,12 @@ const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const { CORS_URL } = process.env;
 require("./db.js");
-const Stripe = require("stripe");
-const cors = require("cors");
 const server = express();
-const axios = require("axios");
+// const Stripe = require("stripe");
+// const axios = require("axios");
 
-const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
+// const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
+
 // const config = {
 //   authRequired: false,
 //   auth0Logout: false,
@@ -44,35 +44,35 @@ server.use((req, res, next) => {
 });
 
 server.use("/", routes);
-server.post("/api/checkout", async (req, res) => {
-  try {
-    const { id, amount, dataUser } = req.body;
-    console.log("id", id, "ammount", amount, "dataUser", dataUser, "fin");
-    const payment = await stripe.paymentIntents.create({
-      amount,
-      currency: "USD",
-      payment_method: id,
-      confirm: true,
-    });
-    let user = await axios.get(
-      `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`
-    );
-    console.log("userData", user.data);
-    axios.put(
-      `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`,
-      {
-        plan: true,
-      }
-    );
-    res.status(200).json(payment);
-  } catch (error) {
-    console.log(error);
-  }
-});
-// Error catching endware.
-server.use((err, req, res, next) => {
-  // eslint-disable-line no-unused-vars
-  console.error(err);
-});
+// server.post("/api/checkout", async (req, res) => {
+//   try {
+//     const { id, amount, dataUser } = req.body;
+//     console.log("id", id, "ammount", amount, "dataUser", dataUser, "fin");
+//     const payment = await stripe.paymentIntents.create({
+//       amount,
+//       currency: "USD",
+//       payment_method: id,
+//       confirm: true,
+//     });
+//     let user = await axios.get(
+//       `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`
+//     );
+//     console.log("userData", user.data);
+//     axios.put(
+//       `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`,
+//       {
+//         plan: true,
+//       }
+//     );
+//     res.status(200).json(payment);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+// // Error catching endware.
+// server.use((err, req, res, next) => {
+//   // eslint-disable-line no-unused-vars
+//   console.error(err);
+// });
 
 module.exports = server;

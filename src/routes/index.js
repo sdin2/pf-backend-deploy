@@ -10,7 +10,7 @@ const forumRoute = require("./forumRoute");
 const rewardRoute = require("./rewardRoute");
 const missionsRoute = require("./missionsRoute");
 const answersRoutes = require("./answersRoute");
-// const paymentRoute = require("./paymentRoute");
+const paymentRoute = require("./paymentRoute");
 
 router.use("/news", newsRoute);
 router.use("/users", userRoute);
@@ -20,6 +20,6 @@ router.use("/forum", forumRoute);
 router.use("/reward", rewardRoute);
 router.use("/missions", missionsRoute);
 router.use("/Answers", answersRoutes);
-// router.use("/payment", paymentRoute);
+router.use("/checkout", paymentRoute);
 
 module.exports = router;
