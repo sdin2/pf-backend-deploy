@@ -64,7 +64,7 @@ server.post("/api/checkout", async (req, res) => {
     );
     res.status(200).json(payment);
   } catch (error) {
-    res.send(error.raw.message);
+    console.log(error);
   }
 });
 // Error catching endware.
