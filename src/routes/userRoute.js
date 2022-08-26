@@ -39,8 +39,8 @@ router.get("/", async (req, res, next) => {
       const userByEmail = userData.filter((e) => e.email === email);
       res.status(200).send(userByEmail);
     } else if (nickname) {
-      const userByEmail = userData.filter((e) => e.email === email);
-      res.status(200).send(userByEmail);
+      const userByNickname = userData.filter((e) => e.nickname === nickname);
+      res.status(200).send(userByNickname);
     } else res.send(userData);
   } catch (error) {
     next(error);
