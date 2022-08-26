@@ -9,7 +9,7 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const { name } = req.body;
+    const name = req.body;
     console.log(name);
     if (name) {
       let videogameByName = await axios.get(
