@@ -8,16 +8,17 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    let allGenres = await Genre.findAll();
-    if (!allGenres.length) {
-      let genreFromApi = await axios.get(
-        `https://api.rawg.io/api/genres?key=${API_KEY_GAMES}`
-      );
-      allGenres = await genreFromApi.data.results.map((r) => ({
-        name: r.name,
-      }));
-      await Genre.bulkCreate(allGenres);
-      allGenres = await Genre.findAll();
+    let name = req.query.name ? req.query.name : req.body.name;
+    let genreFromApi = await axios.get(
+      `https://api.rawg.io/api/genres?key=${API_KEY_GAMES}`
+    );
+    allGenres = genreFromApi.data.results.map((r) => ({
+      id: r.id,
+      name: r.name,
+      games: r.games,
+    }));
+    if (name) {
+      allGenres = allGenres.filter((e) => e.name === name);
     }
     res.send(allGenres);
   } catch (err) {
