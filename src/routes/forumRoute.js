@@ -57,7 +57,26 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   const id = req.params.id;
   try {
-    const forumData = await Forum.findByPk(id);
+    const forumData = await Forum.findByPk(id, {
+      include: {
+        model: User,
+        attributes: [
+          "nickname",
+          "email",
+          "img",
+          "deleteFlag",
+          "bannedFlag",
+          "matched_users",
+          "favoriteGames",
+          "servers",
+          "isAdmin",
+          "rating",
+          "plan",
+        ],
+        model: Answer,
+        attributes: ["id", "comment", "like", "deleteFlag"],
+      },
+    });
     res.send(forumData);
   } catch (error) {
     next(error);
