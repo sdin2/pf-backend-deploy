@@ -1,7 +1,7 @@
 const { axios } = require("axios");
 const express = require("express");
 const router = express.Router();
-const { Answer, Forum } = require("../db.js");
+const { Answer, Forum, User } = require("../db.js");
 
 router.post("/", async (req, res, next) => {
   const id = req.body.id ? req.body.id : req.query.id;
@@ -23,6 +23,18 @@ router.get("/", async (req, res, next) => {
       include: {
         model: Forum,
         attributes: ["id", "title", "deleteFlag"],
+        model: User,
+        attributes: [
+          "id",
+          "nickname",
+          "email",
+          "img",
+          "deleteFlag",
+          "bannedFlag",
+          "isAdmin",
+          "rating",
+          "plan",
+        ],
       },
     });
     res.send(forumData);
