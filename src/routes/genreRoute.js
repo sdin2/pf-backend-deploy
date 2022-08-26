@@ -18,7 +18,9 @@ router.get("/", async (req, res, next) => {
       games: r.games,
     }));
     if (name) {
-      allGenres = allGenres.filter((e) => e.name === name);
+      allGenres = allGenres.filter(
+        (e) => e.name.toLowerCase() === name.toLowerCase()
+      );
     }
     res.send(allGenres);
   } catch (err) {
