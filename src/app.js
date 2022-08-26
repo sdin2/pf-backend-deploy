@@ -37,20 +37,20 @@ server.use((req, res, next) => {
 });
 
 server.use("/", routes);
-server.post("/api/checkout", async (req, res) => {
-  const { id, amount } = req.body;
-  try {
-    const payment = await stripe.paymentIntents.create({
-      amount,
-      currency: "USD",
-      payment_method: id,
-      confirm: true,
-    });
-    res.status(200).json(payment);
-  } catch (error) {
-    console.log(error);
-  }
-});
+// server.post("/api/checkout", async (req, res) => {
+//   const { id, amount } = req.body;
+//   try {
+//     const payment = await stripe.paymentIntents.create({
+//       amount,
+//       currency: "USD",
+//       payment_method: id,
+//       confirm: true,
+//     });
+//     res.status(200).json(payment);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 // Error catching endware.
 server.use((err, req, res, next) => {
