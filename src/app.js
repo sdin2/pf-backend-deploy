@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
-const { auth } = require("express-openid-connect");
+// const { auth } = require("express-openid-connect");
 const { CORS_URL } = process.env;
 require("./db.js");
 const Stripe = require("stripe");
