@@ -10,12 +10,10 @@ const router = Router();
 router.get("/", async (req, res, next) => {
   try {
     const name = req.query.name ? req.query.name : req.body.name;
-    console.log("name", name);
     if (name) {
       let videogameByName = await axios.get(
         `https://api.rawg.io/api/games?key=${API_KEY_GAMES}&search=${name}`
       );
-      console.log("videogames", videogameByName);
       videogameByName = videogameByName.data.results.map((game) => {
         return {
           id: game.id,
