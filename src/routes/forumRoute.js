@@ -40,6 +40,7 @@ router.get("/", async (req, res, next) => {
           "plan",
         ],
         model: Answer,
+        attributes: ["id", "comment", "like", "deleteFlag"],
       },
     });
     if (title) {
