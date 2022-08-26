@@ -23,7 +23,7 @@ server.name = "API";
 
 server.use(
   cors({
-    origin: ["http://localhost:3000", "https://checkout.stripe.com"],
+    origin: ["*", "https://checkout.stripe.com"],
   })
 );
 server.use(express.json());
