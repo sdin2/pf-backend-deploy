@@ -33,4 +33,12 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  const id = req.params.id;
+  let videoGamesById = await axios.get(
+    `https://api.rawg.io/api/games/${id}?key=${API_KEY_GAMES}`
+  );
+  res.send(videoGamesById);
+});
+
 module.exports = router;
