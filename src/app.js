@@ -6,7 +6,7 @@ const routes = require("./routes/index.js");
 const { CORS_URL } = process.env;
 require("./db.js");
 const Stripe = require("stripe");
-
+const cors = require("cors");
 const server = express();
 
 const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
@@ -21,6 +21,11 @@ const config = {
 
 server.name = "API";
 
+server.use(
+  cors({
+    origin: ["http://localhost:3000", "https://checkout.stripe.com"],
+  })
+);
 server.use(express.json());
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
