@@ -1,6 +1,5 @@
 require("dotenv").config();
 const { Router } = require("express");
-const { auth } = require("express-openid-connect");
 const router = Router();
 
 const newsRoute = require("./newsRoute");
