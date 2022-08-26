@@ -56,7 +56,7 @@ server.post("/api/checkout", async (req, res) => {
     let user = await axios.get(
       `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`
     );
-    console.log(user.data);
+    console.log("userData", user.data);
     axios.put(
       `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`,
       {
