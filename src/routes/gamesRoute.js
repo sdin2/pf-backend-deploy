@@ -23,7 +23,7 @@ router.get("/", async (req, res, next) => {
       });
       videogameByName.length
         ? res.status(200).send(videogameByName)
-        : res.status(200).send("Not Found");
+        : res.status(200).send("Games not found");
     } else {
       let videogames = await getGamesDB();
       res.status(200).send(videogames);
