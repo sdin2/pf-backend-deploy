@@ -45,14 +45,14 @@ server.use((req, res, next) => {
 server.use("/", routes);
 server.post("/api/checkout", async (req, res) => {
   const { id, amount, dataUser } = req.body;
+  console.log("id", id, "ammount", amount, "dataUser", dataUser, "fin");
   try {
-    const payment = await stripe.paymentIntents.create({
+    const payment = await Stripe.paymentIntents.create({
       amount,
       currency: "USD",
       payment_method: id,
       confirm: true,
     });
-    console.log("id", id, "ammount", amount, "dataUser", dataUser, "fin");
     let user = await axios.get(
       `https://pf-henry-gamesportal.herokuapp.com/users/${dataUser.id}`
     );
