@@ -51,6 +51,8 @@ User.hasMany(Mission);
 Mission.hasMany(User);
 Forum.hasMany(Answer);
 Answer.belongsTo(Forum);
+Answer.belongsTo(User);
+User.hasMany(Answer);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

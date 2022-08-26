@@ -4,12 +4,14 @@ const router = express.Router();
 const { Answer, Forum, User } = require("../db.js");
 
 router.post("/", async (req, res, next) => {
-  const id = req.body.id ? req.body.id : req.query.id;
+  const idForo = req.body.idForo ? req.body.idForo : req.query.idForo;
+  const idUser = req.body.idUser ? req.body.idUser : req.query.idUser;
   const forum = req.body;
   try {
     await Answer.create({
       comment: forum.comment,
-      forumId: id,
+      forumId: idForo,
+      userId: idUser,
     });
     res.send("Comment posted!");
   } catch (error) {
