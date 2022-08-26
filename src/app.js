@@ -66,8 +66,8 @@ server.post("/api/checkout", async (req, res) => {
     );
     res.status(200).json(payment);
   } catch (error) {
-    console.log("error", error);
-    res.send("error");
+    console.log("error", error, "datastripe", error.StripeCardError);
+    res.send(error);
   }
 });
 // Error catching endware.
