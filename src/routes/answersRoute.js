@@ -1,13 +1,13 @@
 const { axios } = require("axios");
 const express = require("express");
 const router = express.Router();
-const { Answer, User } = require("../db.js");
+const { Answer, Forum } = require("../db.js");
 
 router.post("/", async (req, res, next) => {
   const id = req.body.id ? req.body.id : req.query.id;
   const forum = req.body;
   try {
-    const createComment = await Answer.create({
+    await Answer.create({
       comment: forum.comment,
       forumId: id,
     });
@@ -19,7 +19,12 @@ router.post("/", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    const forumData = await Answer.findAll();
+    const forumData = await Answer.findAll({
+      include: {
+        model: Forum,
+        attributes: ["id", "title", "deleteFlag"],
+      },
+    });
     res.send(forumData);
   } catch (error) {
     next(error);

@@ -1,7 +1,7 @@
 const { axios } = require("axios");
 const express = require("express");
 const router = express.Router();
-const { Forum, User } = require("../db.js");
+const { Forum, User, Answer } = require("../db.js");
 
 router.post("/", async (req, res, next) => {
   const forum = req.body;
@@ -39,6 +39,7 @@ router.get("/", async (req, res, next) => {
           "rating",
           "plan",
         ],
+        model: Answer,
       },
     });
     if (title) {
