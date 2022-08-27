@@ -1,8 +1,7 @@
 const { default: axios } = require("axios");
 const express = require("express");
 const router = express.Router();
-const { User, Forum, Mission } = require("../db.js");
-const Answer = require("../models/Answer.js");
+const { User, Forum, Mission, Answer } = require("../db.js");
 
 // create user
 router.post("/", async (req, res, next) => {
