@@ -22,8 +22,9 @@ router.post("/", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     let id = req.query.id ? req.query.id : req.body.id;
+    let forumData;
     if (id) {
-      const forumData = await Answer.findByPk(id, {
+      forumData = await Answer.findByPk(id, {
         include: {
           model: Forum,
           attributes: ["id", "title", "deleteFlag"],
@@ -42,7 +43,7 @@ router.get("/", async (req, res, next) => {
         },
       });
     } else {
-      const forumData = await Answer.findAll({
+      forumData = await Answer.findAll({
         include: {
           model: Forum,
           attributes: ["id", "title", "deleteFlag"],
