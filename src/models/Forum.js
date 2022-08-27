@@ -21,10 +21,6 @@ module.exports = (sequelize) => {
       allowNull: true,
       defaultValue: [],
     },
-    users_response: {
-      type: DataTypes.JSON,
-      defaultValue: [],
-    },
     deleteFlag: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

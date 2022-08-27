@@ -4,15 +4,13 @@ const router = express.Router();
 const { Forum, User, Answer } = require("../db.js");
 
 router.post("/", async (req, res, next) => {
+  const userId = req.body.userId ? req.body.userId : req.query.userId;
   const forum = req.body;
   try {
-    let userDb = await User.findOne({
-      where: { nickname: forum.nickname },
-    });
     await Forum.create({
       title: forum.title,
       text: forum.text,
-      userId: userDb.dataValues.id,
+      userId: userId,
     });
     res.send("Posteo completado");
   } catch (error) {
