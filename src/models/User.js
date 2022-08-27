@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
       unique: true,
     },
     img: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allownull: true,
       defaultValue: "https://j.gifs.com/ygdY27.gif",
     },
