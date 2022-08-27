@@ -9,7 +9,6 @@ router.post("/", async (req, res, next) => {
   const forum = req.body;
   try {
     await Answer.create({
-      nickname: forum.nickname,
       comment: forum.comment,
       forumId: idForum,
       userId: idUser,
