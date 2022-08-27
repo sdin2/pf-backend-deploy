@@ -9,7 +9,7 @@ router.post("/", async (req, res, next) => {
     let userDb = await User.findOne({
       where: { nickname: forum.nickname },
     });
-    const createForum = await Forum.create({
+    await Forum.create({
       title: forum.title,
       text: forum.text,
       userId: userDb.dataValues.id,
@@ -22,7 +22,7 @@ router.post("/", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    let title = req.query.title;
+    let title = req.query.title ? req.query.title : req.body.title;
     const forumData = await Forum.findAll({
       include: {
         model: User,

@@ -21,8 +21,8 @@ router.post("/", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    let name = req.query.name;
-    const missionData = await Mission.findAll({
+    let name = req.query.name ? req.query.name : req.query.body;
+    let missionData = await Mission.findAll({
       include: {
         model: User,
         attributes: [
@@ -35,13 +35,9 @@ router.get("/", async (req, res, next) => {
       },
     });
     if (name) {
-      const getMissionsByName = missionData.filter((e) =>
-        e.name.includes(name)
-      );
-      res.status(200).send(getMissionsByName);
-    } else {
-      res.send(missionData);
+      missionData = missionData.filter((e) => e.name.includes(name));
     }
+    res.send(missionData);
   } catch (error) {
     next(error);
   }
@@ -50,7 +46,18 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   const id = req.params.id;
   try {
-    const missionData = await Mission.findByPk(id);
+    const missionData = await Mission.findByPk(id, {
+      include: {
+        model: User,
+        attributes: [
+          "nickname",
+          "img",
+          "deleteFlag",
+          "bannedFlag",
+          "missionCompleted",
+        ],
+      },
+    });
     res.send(missionData);
   } catch (error) {
     next(error);

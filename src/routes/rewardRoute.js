@@ -26,7 +26,6 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   const { title, price, image, recompenseType, available } = req.body;
-
   try {
     let createReward = await Reward.create({
       title,

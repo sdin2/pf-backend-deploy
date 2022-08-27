@@ -9,7 +9,6 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   const title = req.query.title;
-
   let allNews = await getAllNews();
   if (title) {
     let newsTitle = allNews.filter((el) =>
