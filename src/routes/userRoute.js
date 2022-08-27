@@ -33,10 +33,10 @@ router.get("/", async (req, res, next) => {
       include: {
         model: Forum,
         attributes: ["id", "title", "deleteFlag"],
+        model: Answer,
+        attributes: ["id", "comment", "deleteFlag", "like", "nickname"],
         model: Mission,
         attributes: ["id", "name", "completed", "coinsRewards"],
-        model: Answer,
-        attributes: ["id", "comment", "deleteFlag", "like"],
       },
     });
     if (email) {
@@ -59,10 +59,10 @@ router.get("/:id", async (req, res, next) => {
       include: {
         model: Forum,
         attributes: ["id", "title", "deleteFlag"],
+        model: Answer,
+        attributes: ["id", "comment", "deleteFlag", "like", "nickname"],
         model: Mission,
         attributes: ["id", "name", "completed", "coinsRewards"],
-        model: Answer,
-        attributes: ["id", "comment", "deleteFlag", "like"],
       },
     });
     res.send(userData);

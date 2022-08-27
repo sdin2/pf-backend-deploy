@@ -9,6 +9,7 @@ router.post("/", async (req, res, next) => {
   const forum = req.body;
   try {
     await Answer.create({
+      nickname: forum.nickname,
       comment: forum.comment,
       forumId: idForum,
       userId: idUser,
@@ -64,7 +65,7 @@ router.get("/", async (req, res, next) => {
     }
     res.send(forumData);
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 });
 
