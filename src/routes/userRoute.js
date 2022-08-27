@@ -30,14 +30,17 @@ router.get("/", async (req, res, next) => {
     let email = req.query.email ? req.query.email : req.body.email;
     let nickname = req.query.nickname ? req.query.nickname : req.body.nickname;
     const userData = await User.findAll({
-      include: {
-        model: Forum,
-        attributes: ["id", "title", "deleteFlag"],
-        model: Answer,
-        attributes: ["id", "comment", "deleteFlag", "like"],
-        model: Mission,
-        attributes: ["id", "name", "completed", "coinsRewards"],
-      },
+      include: [
+        {
+          model: Forum,
+          attributes: ["id", "title", "deleteFlag"],
+        },
+        { model: Answer, attributes: ["id", "comment", "deleteFlag", "like"] },
+        {
+          model: Mission,
+          attributes: ["id", "name", "completed", "coinsRewards"],
+        },
+      ],
     });
     if (email) {
       const userByEmail = userData.filter((e) => e.email === email);
