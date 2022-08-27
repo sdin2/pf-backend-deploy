@@ -33,11 +33,11 @@ router.get("/", async (req, res, next) => {
       include: [
         {
           model: Forum,
-          attributes: ["id", "title", "deleteFlag", "like"],
+          attributes: ["id", "title", "deleteFlag"],
         },
         {
           model: Answer,
-          attributes: ["id", "comment", "deleteFlag"],
+          attributes: ["id", "comment", "deleteFlag", "like"],
         },
         {
           model: Mission,
@@ -79,7 +79,7 @@ router.get("/:id", async (req, res, next) => {
     });
     res.send(userData);
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 });
 
@@ -118,7 +118,7 @@ router.put("/:id", async (req, res, next) => {
 
     res.status(200).json("user updated");
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 });
 
