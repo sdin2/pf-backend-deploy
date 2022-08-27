@@ -74,7 +74,7 @@ router.get("/:id", async (req, res, next) => {
       },
       include: {
         model: Answer,
-        attributes: ["id", "comment", "like", "deleteFlag", "nickname"],
+        attributes: ["id", "comment", "like", "deleteFlag"],
       },
     });
     res.send(forumData);
