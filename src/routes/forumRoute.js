@@ -71,6 +71,8 @@ router.get("/:id", async (req, res, next) => {
           "rating",
           "plan",
         ],
+      },
+      include: {
         model: Answer,
         attributes: ["id", "comment", "like", "deleteFlag", "nickname"],
       },
