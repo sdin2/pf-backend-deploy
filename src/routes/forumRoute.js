@@ -22,24 +22,25 @@ router.get("/", async (req, res, next) => {
   try {
     let title = req.query.title ? req.query.title : req.body.title;
     const forumData = await Forum.findAll({
-      include: {
-        model: User,
-        attributes: [
-          "nickname",
-          "email",
-          "img",
-          "deleteFlag",
-          "bannedFlag",
-          "matched_users",
-          "favoriteGames",
-          "servers",
-          "isAdmin",
-          "rating",
-          "plan",
-        ],
-        model: Answer,
-        attributes: ["id", "comment", "like", "deleteFlag"],
-      },
+      include: [
+        {
+          model: User,
+          attributes: [
+            "nickname",
+            "email",
+            "img",
+            "deleteFlag",
+            "bannedFlag",
+            "matched_users",
+            "favoriteGames",
+            "servers",
+            "isAdmin",
+            "rating",
+            "plan",
+          ],
+        },
+        { model: Answer, attributes: ["id", "comment", "like", "deleteFlag"] },
+      ],
     });
     if (title) {
       const postBytitle = forumData.filter((e) => e.title.includes(title));
@@ -56,26 +57,25 @@ router.get("/:id", async (req, res, next) => {
   const id = req.params.id;
   try {
     const forumData = await Forum.findByPk(id, {
-      include: {
-        model: User,
-        attributes: [
-          "nickname",
-          "email",
-          "img",
-          "deleteFlag",
-          "bannedFlag",
-          "matched_users",
-          "favoriteGames",
-          "servers",
-          "isAdmin",
-          "rating",
-          "plan",
-        ],
-      },
-      include: {
-        model: Answer,
-        attributes: ["id", "comment", "like", "deleteFlag"],
-      },
+      include: [
+        {
+          model: User,
+          attributes: [
+            "nickname",
+            "email",
+            "img",
+            "deleteFlag",
+            "bannedFlag",
+            "matched_users",
+            "favoriteGames",
+            "servers",
+            "isAdmin",
+            "rating",
+            "plan",
+          ],
+        },
+        { model: Answer, attributes: ["id", "comment", "like", "deleteFlag"] },
+      ],
     });
     res.send(forumData);
   } catch (error) {

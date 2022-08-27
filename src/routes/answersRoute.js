@@ -25,41 +25,49 @@ router.get("/", async (req, res, next) => {
     let forumData;
     if (id) {
       forumData = await Answer.findByPk(id, {
-        include: {
-          model: Forum,
-          attributes: ["id", "title", "deleteFlag", "users"],
-          model: User,
-          attributes: [
-            "id",
-            "nickname",
-            "email",
-            "img",
-            "deleteFlag",
-            "bannedFlag",
-            "isAdmin",
-            "rating",
-            "plan",
-          ],
-        },
+        include: [
+          {
+            model: Forum,
+            attributes: ["id", "title", "deleteFlag", "users"],
+          },
+          {
+            model: User,
+            attributes: [
+              "id",
+              "nickname",
+              "email",
+              "img",
+              "deleteFlag",
+              "bannedFlag",
+              "isAdmin",
+              "rating",
+              "plan",
+            ],
+          },
+        ],
       });
     } else {
       forumData = await Answer.findAll({
-        include: {
-          model: Forum,
-          attributes: ["id", "title", "deleteFlag", "users"],
-          model: User,
-          attributes: [
-            "id",
-            "nickname",
-            "email",
-            "img",
-            "deleteFlag",
-            "bannedFlag",
-            "isAdmin",
-            "rating",
-            "plan",
-          ],
-        },
+        include: [
+          {
+            model: Forum,
+            attributes: ["id", "title", "deleteFlag", "users"],
+          },
+          {
+            model: User,
+            attributes: [
+              "id",
+              "nickname",
+              "email",
+              "img",
+              "deleteFlag",
+              "bannedFlag",
+              "isAdmin",
+              "rating",
+              "plan",
+            ],
+          },
+        ],
       });
     }
     res.send(forumData);
@@ -72,22 +80,26 @@ router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const forumData = await Answer.findByPk(id, {
-      include: {
-        model: Forum,
-        attributes: ["id", "title", "deleteFlag", "users"],
-        model: User,
-        attributes: [
-          "id",
-          "nickname",
-          "email",
-          "img",
-          "deleteFlag",
-          "bannedFlag",
-          "isAdmin",
-          "rating",
-          "plan",
-        ],
-      },
+      include: [
+        {
+          model: Forum,
+          attributes: ["id", "title", "deleteFlag", "users"],
+        },
+        {
+          model: User,
+          attributes: [
+            "id",
+            "nickname",
+            "email",
+            "img",
+            "deleteFlag",
+            "bannedFlag",
+            "isAdmin",
+            "rating",
+            "plan",
+          ],
+        },
+      ],
     });
     res.send(forumData);
   } catch (error) {

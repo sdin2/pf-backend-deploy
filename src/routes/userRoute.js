@@ -33,9 +33,8 @@ router.get("/", async (req, res, next) => {
       include: [
         {
           model: Forum,
-          attributes: ["id", "title", "deleteFlag"],
+          attributes: ["id", "title", "deleteFlag", "answers"],
         },
-        { model: Answer, attributes: ["id", "comment", "deleteFlag", "like"] },
         {
           model: Mission,
           attributes: ["id", "name", "completed", "coinsRewards"],
@@ -59,14 +58,16 @@ router.get("/:id", async (req, res, next) => {
   const id = req.params.id;
   try {
     const userData = await User.findByPk(id, {
-      include: {
-        model: Forum,
-        attributes: ["id", "title", "deleteFlag"],
-        model: Answer,
-        attributes: ["id", "comment", "deleteFlag", "like", "nickname"],
-        model: Mission,
-        attributes: ["id", "name", "completed", "coinsRewards"],
-      },
+      include: [
+        {
+          model: Forum,
+          attributes: ["id", "title", "deleteFlag", "answers"],
+        },
+        {
+          model: Mission,
+          attributes: ["id", "name", "completed", "coinsRewards"],
+        },
+      ],
     });
     res.send(userData);
   } catch (error) {
