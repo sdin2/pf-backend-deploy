@@ -33,7 +33,11 @@ router.get("/", async (req, res, next) => {
       include: [
         {
           model: Forum,
-          attributes: ["id", "title", "deleteFlag", "answers"],
+          attributes: ["id", "comment", "deleteFlag"],
+        },
+        {
+          model: Answer,
+          attributes: ["id", "title", "deleteFlag", "like"],
         },
         {
           model: Mission,
