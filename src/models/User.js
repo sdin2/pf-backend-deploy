@@ -71,5 +71,9 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    wantsMatch: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   });
 };
