@@ -28,7 +28,7 @@ router.get("/", async (req, res, next) => {
       forumData = await Answer.findByPk(id, {
         include: {
           model: Forum,
-          attributes: ["id", "title", "deleteFlag"],
+          attributes: ["id", "title", "deleteFlag", "users"],
           model: User,
           attributes: [
             "id",
@@ -47,7 +47,7 @@ router.get("/", async (req, res, next) => {
       forumData = await Answer.findAll({
         include: {
           model: Forum,
-          attributes: ["id", "title", "deleteFlag"],
+          attributes: ["id", "title", "deleteFlag", "users"],
           model: User,
           attributes: [
             "id",
@@ -75,7 +75,7 @@ router.get("/:id", async (req, res, next) => {
     const forumData = await Answer.findByPk(id, {
       include: {
         model: Forum,
-        attributes: ["id", "title", "deleteFlag"],
+        attributes: ["id", "title", "deleteFlag", "users"],
         model: User,
         attributes: [
           "id",
