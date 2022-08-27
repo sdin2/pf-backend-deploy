@@ -33,11 +33,11 @@ router.get("/", async (req, res, next) => {
       include: [
         {
           model: Forum,
-          attributes: ["id", "comment", "deleteFlag"],
+          attributes: ["id", "title", "deleteFlag", "like"],
         },
         {
           model: Answer,
-          attributes: ["id", "title", "deleteFlag", "like"],
+          attributes: ["id", "comment", "deleteFlag"],
         },
         {
           model: Mission,
@@ -65,11 +65,11 @@ router.get("/:id", async (req, res, next) => {
       include: [
         {
           model: Forum,
-          attributes: ["id", "comment", "deleteFlag"],
+          attributes: ["id", "title", "deleteFlag", "like"],
         },
         {
           model: Answer,
-          attributes: ["id", "title", "deleteFlag", "like"],
+          attributes: ["id", "comment", "deleteFlag"],
         },
         {
           model: Mission,
