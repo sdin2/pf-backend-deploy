@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       defaultValue: 0,
     },
     image: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     recompenseType: {
