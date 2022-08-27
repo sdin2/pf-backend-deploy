@@ -28,7 +28,7 @@ router.get("/", async (req, res, next) => {
         include: [
           {
             model: Forum,
-            attributes: ["id", "title", "deleteFlag", "users"],
+            attributes: ["id", "title", "deleteFlag"],
           },
           {
             model: User,
@@ -51,7 +51,7 @@ router.get("/", async (req, res, next) => {
         include: [
           {
             model: Forum,
-            attributes: ["id", "title", "deleteFlag", "users"],
+            attributes: ["id", "title", "deleteFlag"],
           },
           {
             model: User,
@@ -83,7 +83,7 @@ router.get("/:id", async (req, res, next) => {
       include: [
         {
           model: Forum,
-          attributes: ["id", "title", "deleteFlag", "users"],
+          attributes: ["id", "title", "deleteFlag"],
         },
         {
           model: User,
