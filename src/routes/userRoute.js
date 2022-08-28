@@ -9,7 +9,7 @@ router.post("/", async (req, res, next) => {
   try {
     if (user.nickname) {
       const userData = await User.findOne({
-        where: { nickname: user.nickname },
+        where: { nickname: user.nickname.toLowerCase() },
       });
       await User.findOrCreate({
         where: {
@@ -49,7 +49,9 @@ router.get("/", async (req, res, next) => {
       const userByEmail = userData.filter((e) => e.email === email);
       res.status(200).send(userByEmail);
     } else if (nickname) {
-      const userByNickname = userData.filter((e) => e.nickname === nickname);
+      const userByNickname = userData.filter(
+        (e) => e.nickname.toLowerCase() === nickname.toLowerCase()
+      );
       res.status(200).send(userByNickname);
     } else res.send(userData);
   } catch (error) {
