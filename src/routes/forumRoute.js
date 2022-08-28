@@ -39,7 +39,25 @@ router.get("/", async (req, res, next) => {
             "plan",
           ],
         },
-        { model: Answer, attributes: ["id", "comment", "like", "deleteFlag"] },
+        {
+          model: Answer,
+          attributes: ["id", "comment", "like", "deleteFlag"],
+          include: [
+            {
+              model: User,
+              attributes: [
+                "nickname",
+                "email",
+                "img",
+                "deleteFlag",
+                "bannedFlag",
+                "isAdmin",
+                "rating",
+                "plan",
+              ],
+            },
+          ],
+        },
       ],
     });
     if (title) {
