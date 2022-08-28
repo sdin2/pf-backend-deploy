@@ -99,7 +99,14 @@ router.get("/:id", async (req, res, next) => {
         },
         {
           model: Answer,
-          attributes: ["id", "comment", "like", "deleteFlag"],
+          attributes: [
+            "id",
+            "comment",
+            "like",
+            "deleteFlag",
+            "userId",
+            "createdAt",
+          ],
           include: {
             model: User,
             attributes: [
