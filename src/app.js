@@ -6,7 +6,6 @@ const routes = require("./routes/index.js");
 const { CORS_URL } = process.env;
 require("./db.js");
 const Stripe = require("stripe");
-const cors = require("cors");
 const server = express();
 const axios = require("axios");
 const { Server } = require("socket.io");
@@ -24,21 +23,21 @@ const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
 // };
 
 //socket io//////////
-// const socketServerIo = http.createServer(server);
-// const io = new Server(socketServerIo, {
-//   cors: {
-//     origin: "*",
-//   },
-// });
+const socketServerIo = http.createServer(server);
+const io = new Server(socketServerIo, {
+  cors: {
+    origin: "*",
+  },
+});
 
-// io.on("connection", (socket) => {
-//   console.log("a user connected");
-//   console.log(socket.id);
-//   socket.on("messege", (messege) => {
-//     console.log(messege);
-//     socket.broadcast.emit("messegeFromBack", messege);
-//   });
-// });
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  console.log(socket.id);
+  socket.on("messege", (messege) => {
+    console.log(messege);
+    socket.broadcast.emit("messegeFromBack", messege);
+  });
+});
 /////////////////////////
 
 server.name = "API";
