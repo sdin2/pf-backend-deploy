@@ -9,6 +9,9 @@ const Stripe = require("stripe");
 const cors = require("cors");
 const server = express();
 const axios = require("axios");
+const { Server } = require("socket.io");
+const http = require("http");
+const cors = require("cors");
 
 const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
 // const config = {
@@ -19,6 +22,24 @@ const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
 //   clientID: process.env.CLIENTID,
 //   issuerBaseURL: process.env.ISSUREURL,
 // };
+
+//socket io//////////
+const socketServerIo = http.createServer(server);
+const io = new Server(socketServerIo, {
+  cors: {
+    origin: "*",
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  console.log(socket.id);
+  socket.on("messege", (messege) => {
+    console.log(messege);
+    socket.broadcast.emit("messegeFromBack", messege);
+  });
+});
+/////////////////////////
 
 server.name = "API";
 
@@ -76,4 +97,4 @@ server.use((err, req, res, next) => {
   console.error(err);
 });
 
-module.exports = server;
+module.exports = socketServerIo;
