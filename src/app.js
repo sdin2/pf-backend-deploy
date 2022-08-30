@@ -96,4 +96,4 @@ server.use((err, req, res, next) => {
   console.error(err);
 });
 
-module.exports = server;
+module.exports = socketServerIo;
