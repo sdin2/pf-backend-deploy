@@ -125,19 +125,3 @@ router.put("/:id", async (req, res, next) => {
     console.log(error);
   }
 });
-
-router.get("/:nickname", async (res, req) => {
-  const nickname = req.params.nickname;
-
-  const nicknameAvailable = await User.finOne({
-    where: { [nickname]: nickname },
-  });
-
-  if (nicknameAvailable === null) {
-    res.send(true);
-  } else {
-    res.send(false);
-  }
-});
-
-module.exports = router;
