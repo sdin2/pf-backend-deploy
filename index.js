@@ -8,7 +8,7 @@ let PORT = process.env.PORT;
 conn.sync().then(() => {
   socketServerIo.listen(PORT, () => {
     saveAllGenresInDb();
-    saveAllGamesInDb();
+    // saveAllGamesInDb();
     console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
   });
 });
