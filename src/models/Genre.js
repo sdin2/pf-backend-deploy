@@ -13,8 +13,5 @@ module.exports = (sequelize) => {
       allownull: false,
       unique: true,
     },
-    games: {
-      type: DataTypes.JSON,
-    },
   });
 };
