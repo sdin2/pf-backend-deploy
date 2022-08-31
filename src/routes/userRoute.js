@@ -58,7 +58,7 @@ router.get("/", async (req, res, next) => {
         ? res.send("User not found")
         : res.status(200).send(userByNickname);
     }
-    if (findNickname === true) {
+    if (findNickname == true) {
       let userDataOnlyNickname = userData.map((e) => e.nickname);
       res.send(userDataOnlyNickname);
     }
