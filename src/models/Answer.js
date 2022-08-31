@@ -17,8 +17,8 @@ module.exports = (sequelize) => {
       defaultValue: false,
     },
     like: {
-      type: DataTypes.JSON,
-      defaultValue: [],
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
   });
 };
