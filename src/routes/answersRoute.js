@@ -1,21 +1,19 @@
-const axios = require("axios");
+const { axios } = require("axios");
 const express = require("express");
 const router = express.Router();
-const { Mission, User } = require("../db.js");
+const { Answer, Forum, User } = require("../db.js");
 
 router.post("/", async (req, res, next) => {
-  const { name, description, coinsRewards, nickname } = req.body;
+  const idForum = req.body.idForum ? req.body.idForum : req.query.idForum;
+  const idUser = req.body.idUser ? req.body.idUser : req.query.idUser;
+  const forum = req.body;
   try {
-    let userDb = await User.findOne({
-      where: { nickname: nickname },
+    await Answer.create({
+      comment: forum.comment,
+      forumId: idForum,
+      userId: idUser,
     });
-    Mission.create({
-      name,
-      description,
-      coinsRewards,
-      userId: userDb.dataValues.id,
-    });
-    res.status(200).json("Mission created succesfuly!");
+    res.send("Comment posted!");
   } catch (error) {
     next(error);
   }
@@ -23,44 +21,87 @@ router.post("/", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    let name = req.query.name ? req.query.name : req.query.body;
-    let missionData = await Mission.findAll({
-      include: {
-        model: User,
-        attributes: [
-          "nickname",
-          "img",
-          "deleteFlag",
-          "bannedFlag",
-          "missionCompleted",
+    let id = req.query.id ? req.query.id : req.body.id;
+    let forumData;
+    if (id) {
+      forumData = await Answer.findByPk(id, {
+        include: [
+          {
+            model: Forum,
+            attributes: ["id", "title", "deleteFlag"],
+          },
+          {
+            model: User,
+            attributes: [
+              "id",
+              "nickname",
+              "email",
+              "img",
+              "deleteFlag",
+              "bannedFlag",
+              "isAdmin",
+              "rating",
+              "plan",
+            ],
+          },
         ],
-      },
-    });
-    if (name) {
-      missionData = missionData.filter((e) => e.name.includes(name));
+      });
+    } else {
+      forumData = await Answer.findAll({
+        include: [
+          {
+            model: Forum,
+            attributes: ["id", "title", "deleteFlag"],
+          },
+          {
+            model: User,
+            attributes: [
+              "id",
+              "nickname",
+              "email",
+              "img",
+              "deleteFlag",
+              "bannedFlag",
+              "isAdmin",
+              "rating",
+              "plan",
+            ],
+          },
+        ],
+      });
     }
-    res.send(missionData);
+    res.send(forumData);
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 });
 
 router.get("/:id", async (req, res, next) => {
-  const id = req.params.id;
   try {
-    const missionData = await Mission.findByPk(id, {
-      include: {
-        model: User,
-        attributes: [
-          "nickname",
-          "img",
-          "deleteFlag",
-          "bannedFlag",
-          "missionCompleted",
-        ],
-      },
+    const id = req.params.id;
+    const forumData = await Answer.findByPk(id, {
+      include: [
+        {
+          model: Forum,
+          attributes: ["id", "title", "deleteFlag"],
+        },
+        {
+          model: User,
+          attributes: [
+            "id",
+            "nickname",
+            "email",
+            "img",
+            "deleteFlag",
+            "bannedFlag",
+            "isAdmin",
+            "rating",
+            "plan",
+          ],
+        },
+      ],
     });
-    res.send(missionData);
+    res.send(forumData);
   } catch (error) {
     next(error);
   }
@@ -70,13 +111,13 @@ router.put("/:id", async (req, res, next) => {
   const id = req.params.id;
   const allBody = req.body;
   try {
-    let missionData = await Forum.findByPk(id);
-    await missionData.update({
-      name: allBody.name,
-      description: allBody.description,
-      coinsRewards: allBody.coinsRewards,
+    let forumData = await Answer.findByPk(id);
+    await forumData.update({
+      comment: allBody.comment,
+      like: allBody.like,
+      deleteFlag: allBody.deleteFlag,
     });
-    res.json("Mission updated succesfuly!");
+    res.json("Commentario editado correctamente");
   } catch (error) {
     next(error);
   }
