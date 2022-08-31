@@ -1,6 +1,7 @@
 const axios = require("axios");
 require("dotenv").config();
 const { API_KEY_GAMES } = process.env;
+const { Genre } = require("../db");
 
 async function getGenres() {
   let genreFromApi = await axios.get(
