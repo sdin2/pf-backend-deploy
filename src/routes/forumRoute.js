@@ -140,7 +140,7 @@ router.put("/:id", async (req, res, next) => {
       title: allBody.title,
       text: allBody.text,
       deleteFlag: allBody.deleteFlag,
-      othersUsersLike: allBody.othersUsersLike,
+      othersUsersLike: [...othersUsersLike, allBody.othersUsersLike],
       users_response: allBody.users_response,
     });
     res.json("Posteo editado correctamente");
