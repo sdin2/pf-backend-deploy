@@ -57,15 +57,15 @@ async function saveAllGamesInDb() {
       },
     });
   });
-  const allGenres = await getGenres();
-  allGenres.forEach((e) => {
-    Genre.findOrCreate({
-      where: {
-        name: e.name,
-      },
-    });
-  });
-  console.log("all genres saved in data base");
+  // const allGenres = await getGenres();
+  // allGenres.forEach((e) => {
+  //   Genre.findOrCreate({
+  //     where: {
+  //       name: e.name,
+  //     },
+  //   });
+  // });
+  // console.log("all genres saved in data base");
   console.log("all games saved in data base");
 }
 
