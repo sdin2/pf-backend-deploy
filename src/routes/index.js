@@ -20,6 +20,7 @@ router.use("/forum", forumRoute);
 router.use("/reward", rewardRoute);
 router.use("/missions", missionsRoute);
 router.use("/answers", answersRoutes);
+router.use("/nickname", answersRoutes);
 // router.use("/payment", paymentRoute);
 
 module.exports = router;
