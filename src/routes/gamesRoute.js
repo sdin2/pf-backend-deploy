@@ -19,6 +19,7 @@ router.get("/", async (req, res, next) => {
           id: game.id,
           name: game.name,
           img: game.background_image,
+          description: game.description,
         };
       });
       videogameByName.length
