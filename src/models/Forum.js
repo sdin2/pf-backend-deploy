@@ -29,5 +29,8 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    genra: {
+      type: DataTypes.STRING,
+    },
   });
 };
