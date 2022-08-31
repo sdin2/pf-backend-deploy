@@ -15,9 +15,9 @@ async function getGenres() {
 }
 
 async function saveAllGenresInDb() {
-  const allGames = await getGenres();
-  allGames.forEach((e) => {
-    Game.findOrCreate({
+  const allGenres = await getGenres();
+  allGenres.forEach((e) => {
+    Genre.findOrCreate({
       where: {
         name: e.name,
         games: e.games,
@@ -28,5 +28,6 @@ async function saveAllGenresInDb() {
 }
 
 module.exports = {
+  getGenres,
   saveAllGenresInDb,
 };
