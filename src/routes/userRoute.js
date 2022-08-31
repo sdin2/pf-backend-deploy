@@ -53,7 +53,7 @@ router.get("/", async (req, res, next) => {
         (e) => e.nickname.toLowerCase() === nickname.toLowerCase()
       );
       userByNickname.length === 0
-        ? res.send("no se encontro al usuario")
+        ? res.send("User not found")
         : res.status(200).send(userByNickname);
     } else res.send(userData);
   } catch (error) {
@@ -123,6 +123,20 @@ router.put("/:id", async (req, res, next) => {
     res.status(200).json("user updated");
   } catch (error) {
     console.log(error);
+  }
+});
+
+router.get("/:nickname/available", async (res, req) => {
+  const { nickname } = req.params;
+
+  const nicknameAvailable = await User.finOne({
+    where: { [nickname]: nickname },
+  });
+
+  if (nicknameAvailable === null) {
+    res.send(true);
+  } else {
+    res.send(false);
   }
 });
 
