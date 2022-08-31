@@ -11,7 +11,7 @@ router.post("/", async (req, res, next) => {
       title: forum.title,
       text: forum.text,
       userId: userId,
-      genra: forum.genra,
+      genre: forum.genre,
     });
     res.send("Posteo completado");
   } catch (error) {
