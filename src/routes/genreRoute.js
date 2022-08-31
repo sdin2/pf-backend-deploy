@@ -6,23 +6,19 @@ const { Genre } = require("../db");
 
 const router = Router();
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    let genres = await Genre.findByPk(id);
+    res.send(genres);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get("/", async (req, res, next) => {
   try {
-    let name = req.query.name ? req.query.name : req.body.name;
-    let genreFromApi = await axios.get(
-      `https://api.rawg.io/api/genres?key=${API_KEY_GAMES}`
-    );
-    allGenres = genreFromApi.data.results.map((r) => ({
-      id: r.id,
-      name: r.name,
-      games: r.games,
-    }));
-    if (name) {
-      allGenres = allGenres.filter(
-        (e) => e.name.toLowerCase() === name.toLowerCase()
-      );
-    }
-    res.send(allGenres);
+    let genres = await Genre.findAll();
+    res.send(genres);
   } catch (err) {
     next(err);
   }
