@@ -5,15 +5,13 @@ const { Forum, User, Answer } = require("../db.js");
 
 router.post("/", async (req, res, next) => {
   const userId = req.body.userId ? req.body.userId : req.query.userId;
-  const genreId = req.body.userId ? req.body.userId : req.query.userId;
   const forum = req.body;
   try {
     await Forum.create({
       title: forum.title,
       text: forum.text,
       userId: userId,
-      genreId: genreId,
-      genre: forum.genre,
+      genra: forum.genra,
     });
     res.send("Posteo completado");
   } catch (error) {

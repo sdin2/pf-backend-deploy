@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    genra: {
+    genre: {
       type: DataTypes.STRING,
     },
   });
