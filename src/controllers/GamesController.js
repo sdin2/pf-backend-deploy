@@ -1,7 +1,8 @@
 const axios = require("axios");
 require("dotenv").config();
 const { API_KEY_GAMES } = process.env;
-const { Game } = require("../db");
+const { Game, Genre } = require("../db");
+const { getGenres } = require("./GenreController");
 
 async function getAllGames() {
   let gamesAPI;
@@ -56,6 +57,15 @@ async function saveAllGamesInDb() {
       },
     });
   });
+  const allGenres = await getGenres();
+  allGenres.forEach((e) => {
+    Genre.findOrCreate({
+      where: {
+        name: e.name,
+      },
+    });
+  });
+  console.log("all genres saved in data base");
   console.log("all games saved in data base");
 }
 
