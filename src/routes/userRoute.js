@@ -121,6 +121,7 @@ router.put("/:id", async (req, res, next) => {
     res.status(200).json("user updated");
   } catch (error) {
     console.log(error);
+    res.send("nickname already exist");
   }
 });
 
