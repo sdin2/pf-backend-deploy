@@ -26,8 +26,8 @@ module.exports = (sequelize) => {
       defaultValue: false,
     },
     report: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+      type: DataTypes.JSON,
+      defaultValue: [],
     },
     genre: {
       type: DataTypes.STRING,
