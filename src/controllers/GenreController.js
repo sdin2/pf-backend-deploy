@@ -6,7 +6,7 @@ async function getGenres() {
   let genreFromApi = await axios.get(
     `https://api.rawg.io/api/genres?key=${API_KEY_GAMES}`
   );
-  allGenres = genreFromApi.data.results.map((r) => ({
+  genreFromApi = genreFromApi.data.results.map((r) => ({
     name: r.name,
     games: r.games,
   }));
