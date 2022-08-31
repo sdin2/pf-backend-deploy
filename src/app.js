@@ -13,7 +13,6 @@ const http = require("http");
 const cors = require("cors");
 
 const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
-server.use(cors);
 // const config = {
 //   authRequired: false,
 //   auth0Logout: false,
