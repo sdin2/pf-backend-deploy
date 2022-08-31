@@ -9,7 +9,6 @@ async function getGenres() {
   );
   let allGenre = genreFromApi.data.results.map((r) => ({
     name: r.name,
-    games: r.games,
   }));
 
   return allGenre;
@@ -22,7 +21,6 @@ async function saveAllGenresInDb() {
       Genre.findOrCreate({
         where: {
           name: e.name,
-          games: e.games,
         },
       });
     });
