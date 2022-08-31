@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
       unique: true,
     },
     img: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allownull: true,
       defaultValue: "https://j.gifs.com/ygdY27.gif",
     },
@@ -74,6 +74,10 @@ module.exports = (sequelize) => {
     wantsMatch: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      defaultValue: "Bienvenido a mi perfil!",
     },
   });
 };

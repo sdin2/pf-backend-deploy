@@ -116,8 +116,8 @@ router.put("/:id", async (req, res, next) => {
       isAdmin: allBody.isAdmin,
       rating: allBody.rating,
       plan: allBody.plan,
+      description: allBody.description,
     });
-
     res.status(200).json("user updated");
   } catch (error) {
     console.log(error);
