@@ -10,6 +10,7 @@ const forumRoute = require("./forumRoute");
 const rewardRoute = require("./rewardRoute");
 const missionsRoute = require("./missionsRoute");
 const answersRoutes = require("./answersRoute");
+const nickname = require("./nicknameRoute");
 // const paymentRoute = require("./paymentRoute");
 
 router.use("/news", newsRoute);
