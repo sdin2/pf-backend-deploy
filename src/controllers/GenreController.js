@@ -16,16 +16,20 @@ async function getGenres() {
 }
 
 async function saveAllGenresInDb() {
-  const allGenres = await getGenres();
-  allGenres.forEach((e) => {
-    Genre.findOrCreate({
-      where: {
-        name: e.name,
-        games: e.games,
-      },
+  try {
+    const allGenres = await getGenres();
+    allGenres.forEach((e) => {
+      Genre.findOrCreate({
+        where: {
+          name: e.name,
+          games: e.games,
+        },
+      });
     });
-  });
-  console.log("all genres saved in data base");
+    console.log("all genres saved in data base");
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = {
