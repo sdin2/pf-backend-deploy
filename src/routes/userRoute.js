@@ -52,7 +52,9 @@ router.get("/", async (req, res, next) => {
       const userByNickname = userData.filter(
         (e) => e.nickname.toLowerCase() === nickname.toLowerCase()
       );
-      res.status(200).send(userByNickname);
+      userByNickname.length === 0
+        ? res.send("no se encontro al usuario")
+        : res.status(200).send(userByNickname);
     } else res.send(userData);
   } catch (error) {
     next(error);
@@ -121,7 +123,6 @@ router.put("/:id", async (req, res, next) => {
     res.status(200).json("user updated");
   } catch (error) {
     console.log(error);
-    res.send("nickname already exist");
   }
 });
 
