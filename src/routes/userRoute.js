@@ -27,7 +27,9 @@ router.post("/", async (req, res, next) => {
 // get all users
 router.get("/", async (req, res, next) => {
   try {
-    let findNickname = req.query.email ? req.query.email : req.body.email;
+    let findNickname = req.query.findNickname
+      ? req.query.findNickname
+      : req.body.findNickname;
     let email = req.query.email ? req.query.email : req.body.email;
     let nickname = req.query.nickname ? req.query.nickname : req.body.nickname;
     const userData = await User.findAll({
