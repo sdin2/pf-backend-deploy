@@ -126,8 +126,8 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.get("/avaiable/:nickname", async (res, req) => {
-  const nickname = req.params.nickname;
+router.get("/available/:nickname", async (res, req) => {
+  const { nickname } = req.params;
   console.log(nickname);
   const nicknameAvailable = await User.finOne({
     where: { nickname: nickname },
@@ -139,3 +139,5 @@ router.get("/avaiable/:nickname", async (res, req) => {
     res.send(false);
   }
 });
+
+module.exports = router;
