@@ -1,26 +1,17 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  sequelize.define("answer", {
+  sequelize.define("chat", {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.STRING,
       primaryKey: true,
-      allowNull: false,
-    },
-    comment: {
-      type: DataTypes.TEXT,
       allowNull: false,
     },
     deleteFlag: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    like: {
-      type: DataTypes.JSON,
-      defaultValue: [],
-    },
-    dislike: {
+    messages: {
       type: DataTypes.JSON,
       defaultValue: [],
     },

@@ -16,16 +16,16 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     completed: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
-    icon : {
-        type: DataTypes.STRING,
-        defaultValue: 'https://cdn-icons-png.flaticon.com/512/1628/1628441.png'
+    icon: {
+      type: DataTypes.STRING,
+      defaultValue: "https://cdn-icons-png.flaticon.com/512/1628/1628441.png",
     },
-    coinsRewards : {
-        type: DataTypes.INTEGER,
-        defaultValue: 0
-    }
+    coinsRewards: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
   });
 };

@@ -1,11 +1,12 @@
 const { default: axios } = require("axios");
 const express = require("express");
 const router = express.Router();
-const { User, Forum, Mission, Answer } = require("../db.js");
+const { User, Forum, Mission, Answer, Chat } = require("../db.js");
 
 // create user
 router.post("/", async (req, res, next) => {
   const user = req.body;
+  console.log(user);
   try {
     if (user.nickname) {
       const userData = await User.findOne({
@@ -44,6 +45,10 @@ router.get("/", async (req, res, next) => {
           model: Mission,
           attributes: ["id", "name", "completed", "coinsRewards"],
         },
+        // {
+        //   model: Chat,
+        //   attributes: ["deleteFlag", "messages", "id"],
+        // },
       ],
     });
     if (email) {
@@ -57,8 +62,7 @@ router.get("/", async (req, res, next) => {
       userByNickname.length === 0
         ? res.send("User not found")
         : res.status(200).send(userByNickname);
-    }
-    if (findNickname == "nickname") {
+    } else if (findNickname == "nickname") {
       let userDataOnlyNickname = userData.map((e) => e.nickname);
       res.send(userDataOnlyNickname);
     } else res.send(userData);
@@ -69,7 +73,13 @@ router.get("/", async (req, res, next) => {
 
 // get a user
 router.get("/:id", async (req, res, next) => {
+  const idRoom = req.body.idRoom ? req.body.idRoom : req.query.idRoom;
   const id = req.params.id;
+  let chatShow = req.body.chatShow
+    ? req.body.chatShow
+    : req.query.chatShow
+    ? req.query.chatShow
+    : false;
   try {
     const userData = await User.findByPk(id, {
       include: [
@@ -85,8 +95,17 @@ router.get("/:id", async (req, res, next) => {
           model: Mission,
           attributes: ["id", "name", "completed", "coinsRewards"],
         },
+        { model: Chat, attributes: ["id", "messages", "deleteFlag"] },
       ],
     });
+    if (chatShow === false) {
+      let chats = [];
+      userData.dataValues.chats = chats;
+    } else if (idRoom) {
+      let chats = userData.dataValues.chats.filter((e) => e.id === idRoom);
+      userData.dataValues.chats = chats;
+    }
+
     res.send(userData);
   } catch (error) {
     console.log(error);
@@ -95,10 +114,11 @@ router.get("/:id", async (req, res, next) => {
 
 // update a user
 router.put("/:id", async (req, res, next) => {
-  const id = req.params.id ? req.params.id : req.body.id;
+  const id = req.params.id;
   const allBody = req.body;
   try {
     let userData = await User.findByPk(id);
+    let addFriends = userData.dataValues.friends;
     if (
       allBody.delete === false &&
       !userData.favoriteGames.some((e) => e === allBody.favorite)
@@ -109,7 +129,19 @@ router.put("/:id", async (req, res, next) => {
         (e) => e !== allBody.favorite
       );
     }
+    if (
+      allBody.deleteFriend === false &&
+      !addFriends.some((e) => e === allBody.friends)
+    ) {
+      addFriends = [...addFriends, allBody.friends];
+    } else if (allBody.deleteFriend === true) {
+      addFriends = userData.dataValues.friends.filter(
+        (e) => e !== allBody.friends
+      );
+    }
+
     await userData.update({
+      friends: addFriends,
       nickname: allBody.nickname,
       email: allBody.email,
       img: allBody.img,
@@ -122,6 +154,7 @@ router.put("/:id", async (req, res, next) => {
       servers: allBody.servers,
       missionCompleted: allBody.missionCompleted,
       isAdmin: allBody.isAdmin,
+      isSuperAdmin: allBody.isAdmin,
       rating: allBody.rating,
       plan: allBody.plan,
       description: allBody.description,

@@ -60,8 +60,12 @@ module.exports = (sequelize) => {
       defaultValue: [],
     },
     isAdmin: {
-      type: DataTypes.JSON,
-      defaultValue: { user: true, admin: false, superAdmin: false },
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    isSuperAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     rating: {
       type: DataTypes.INTEGER,
@@ -78,6 +82,10 @@ module.exports = (sequelize) => {
     description: {
       type: DataTypes.STRING,
       defaultValue: "Bienvenido a mi perfil!",
+    },
+    friends: {
+      type: DataTypes.JSON,
+      defaultValue: [],
     },
   });
 };
