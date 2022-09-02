@@ -121,22 +121,22 @@ router.put("/:id", async (req, res, next) => {
     let userData = await User.findByPk(id);
     let addFriends=userData.dataValues.friends
     if (
-      allBody.delete === false &&
+      allBody.delete == false &&
       !userData.favoriteGames.some((e) => e === allBody.favorite)
     ) {
       userData.favoriteGames = [...userData.favoriteGames, allBody.favorite];
-    } else if (allBody.delete === true) {
+    } else if (allBody.delete == true) {
       userData.favoriteGames = userData.favoriteGames.filter(
         (e) => e !== allBody.favorite
       );
     }
-    if(deleteFriend===false && !addFriends.some(e=>e===allBody.friends)){
+    if(deleteFriend==false && !addFriends.some(e=>e===allBody.friends)){
       addFriends=[...addFriends, allBody.friends]
     }
-    else if (deleteFriend===true){
+    else if (deleteFriend==true){
       addFriends = userData.dataValues.friends.filter(e=>e !== allBody.friends) 
     }
-    console.log(deleteFriend,allBody.friends)
+
     await userData.update({
       friends : addFriends,
       nickname: allBody.nickname,
