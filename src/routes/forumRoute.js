@@ -136,6 +136,7 @@ router.put("/:id", async (req, res, next) => {
   const allBody = req.body;
   try {
     let forumData = await Forum.findByPk(id);
+    console.log(forumData)
     await forumData.update({
       title: allBody.title,
       text: allBody.text,
@@ -144,7 +145,7 @@ router.put("/:id", async (req, res, next) => {
       report: [...report, allBody.report],
       users_response: allBody.users_response,
     });
-    res.json("Posteo editado correctamente");
+    res.send("Posteo editado correctamente");
   } catch (error) {
     next(error);
   }
