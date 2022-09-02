@@ -134,6 +134,7 @@ router.get("/:id", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   const id = req.params.id;
   const allBody = req.body;
+  console.log(allBody)
   try {
     let forumData = await Forum.findByPk(id);
     console.log(forumData)
