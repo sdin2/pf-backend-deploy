@@ -49,7 +49,6 @@ router.put("/:id", async (req, res, next) => {
       {
         userId: allBody.userId,
         messages: allBody.messages,
-        createdAt: chatData.updatedAt,
       },
     ];
     let chat = [...chatData.dataValue.messages, userChat];
