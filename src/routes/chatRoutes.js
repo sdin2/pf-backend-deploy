@@ -45,6 +45,7 @@ router.put("/:id", async (req, res, next) => {
   const allBody = req.body;
   try {
     let chatData = await Chat.findByPk(id);
+    console.log(chatData)
     let userChat = [
       {
         userId: allBody.userId,
@@ -52,7 +53,6 @@ router.put("/:id", async (req, res, next) => {
       },
     ];
     let chat = [...chatData.messages, userChat];
-    console.log(chatData.messages)
     await chatData.update({
       messages: chat,
       deleteFlag: allBody.deleteFlag,
