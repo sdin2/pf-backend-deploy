@@ -91,8 +91,8 @@ router.get("/:id", async (req, res, next) => {
           model: Mission,
           attributes: ["id", "name", "completed", "coinsRewards"],
         },
-        chatShow != false ? {model: Chat,
-          attributes: ["id", "messages", "deleteFlag"]} : ""
+        {model: Chat,
+          attributes: ["id", "messages", "deleteFlag"]}
       ],
     });
     // if(chatShow==false){
