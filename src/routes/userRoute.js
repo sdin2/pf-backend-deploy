@@ -95,10 +95,10 @@ router.get("/:id", async (req, res, next) => {
           attributes: ["id", "messages", "deleteFlag"]}
       ],
     });
-    // if(chatShow==false){
-    //   let chats=[]
-    //   userData.dataValues.chats=chats
-    // }
+    if(chatShow==false){
+      let chats=[]
+      userData.dataValues.chats=chats
+    }
     if(idRoom){
       let chats = userData.dataValues.chats.filter(e=>e.id===idRoom)
       userData.dataValues.chats=chats
