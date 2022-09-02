@@ -45,16 +45,16 @@ router.put("/:id", async (req, res, next) => {
   const allBody = req.body;
   try {
     let chatData = await Chat.findByPk(id);
-    console.log(chatData)
     let userChat = [
       {
         userId: allBody.userId,
         messages: allBody.messages,
+        createdAt: chatData.updatedAt,
       },
     ];
-    let chat = [...chatData.messages, userChat];
+    chatData.messages = [...chatData.messages, userChat];
     await chatData.update({
-      messages: chat,
+      messages: chatData.messages,
       deleteFlag: allBody.deleteFlag,
     });
     res.status(200).json("messege modified");
