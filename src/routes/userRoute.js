@@ -73,7 +73,6 @@ router.get("/", async (req, res, next) => {
 
 // get a user
 router.get("/:id", async (req, res, next) => {
-  const idRoom = req.body.idRoom ? req.body.idRoom : req.query.idRoom;
   const id = req.params.id;
   let chatShow = req.body.chatShow
     ? req.body.chatShow
@@ -100,9 +99,6 @@ router.get("/:id", async (req, res, next) => {
     });
     if (chatShow === false) {
       let chats = [];
-      userData.dataValues.chats = chats;
-    } else if (idRoom) {
-      let chats = userData.dataValues.chats.filter((e) => e.id === idRoom);
       userData.dataValues.chats = chats;
     }
 

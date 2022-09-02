@@ -6,7 +6,6 @@ const { Chat, User } = require("../db.js");
 router.post("/", async (req, res, next) => {
   const chat = req.body;
   let idRoom = [chat.user1Id, chat.user2Id].sort().join("_");
-  console.log(idRoom, chat);
   try {
     await Chat.findOrCreate({
       where: { id: idRoom },
