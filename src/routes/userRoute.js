@@ -91,15 +91,15 @@ router.get("/:id", async (req, res, next) => {
           model: Mission,
           attributes: ["id", "name", "completed", "coinsRewards"],
         },
-        {model: Chat,
-          attributes: ["id", "messages", "deleteFlag"]}
+        chatShow != false ? {model: Chat,
+          attributes: ["id", "messages", "deleteFlag"]} : ""
       ],
     });
-    if(chatShow==false){
-      let chats=[]
-      userData.dataValues.chats=chats
-    }
-    else if(idRoom){
+    // if(chatShow==false){
+    //   let chats=[]
+    //   userData.dataValues.chats=chats
+    // }
+    if(idRoom){
       let chats = userData.dataValues.chats.filter(e=>e.id===idRoom)
       userData.dataValues.chats=chats
     }
