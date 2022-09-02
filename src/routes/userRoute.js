@@ -73,12 +73,9 @@ router.get("/", async (req, res, next) => {
 
 // get a user
 router.get("/:id", async (req, res, next) => {
+  const idRoom=req.body.idRoom?req.body.idRoom : req.query.idRoom
   const id = req.params.id;
-  let chatShow = req.body.chatShow
-    ? req.body.chatShow
-    : req.query.chatShow
-    ? req.query.chatShow
-    : false;
+  let chatShow=req.body.chatShow ? req.body.chatShow : req.query.chatShow ? req.query.chatShow : false
   try {
     const userData = await User.findByPk(id, {
       include: [
@@ -94,15 +91,21 @@ router.get("/:id", async (req, res, next) => {
           model: Mission,
           attributes: ["id", "name", "completed", "coinsRewards"],
         },
-        { model: Chat, attributes: ["id", "messages", "deleteFlag"] },
+        {model: Chat,
+          attributes: ["id", "messages", "deleteFlag"]}
       ],
     });
-    if (chatShow === false) {
-      let chats = [];
-      userData.dataValues.chats = chats;
+    if(chatShow==false){
+      let chats=[]
+      userData.dataValues.chats=chats
     }
-
+    else if(idRoom){
+      let chats = userData.dataValues.chats.filter(e=>e.id===idRoom)
+      userData.dataValues.chats=chats
+    }
+  
     res.send(userData);
+    
   } catch (error) {
     console.log(error);
   }
@@ -114,7 +117,7 @@ router.put("/:id", async (req, res, next) => {
   const allBody = req.body;
   try {
     let userData = await User.findByPk(id);
-    let addFriends = userData.dataValues.friends;
+    let addFriends=userData.dataValues.friends
     if (
       allBody.delete === false &&
       !userData.favoriteGames.some((e) => e === allBody.favorite)
@@ -125,19 +128,15 @@ router.put("/:id", async (req, res, next) => {
         (e) => e !== allBody.favorite
       );
     }
-    if (
-      allBody.deleteFriend === false &&
-      !addFriends.some((e) => e === allBody.friends)
-    ) {
-      addFriends = [...addFriends, allBody.friends];
-    } else if (allBody.deleteFriend === true) {
-      addFriends = userData.dataValues.friends.filter(
-        (e) => e !== allBody.friends
-      );
+    if(allBody.deleteFriend===false && !addFriends.some(e=>e===allBody.friends)){
+      addFriends=[...addFriends, allBody.friends]
     }
-
+    else if(allBody.deleteFriend===true){
+      addFriends = userData.dataValues.friends.filter(e=>e !== allBody.friends) 
+    }
+    
     await userData.update({
-      friends: addFriends,
+      friends : addFriends,
       nickname: allBody.nickname,
       email: allBody.email,
       img: allBody.img,
