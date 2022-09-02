@@ -128,15 +128,11 @@ router.put("/:id", async (req, res, next) => {
         (e) => e !== allBody.favorite
       );
     }
-    if(allBody.deleteFriend===false && !addFriends.some(e=>e.friendId===allBody.friends.friendId)){
-      addFriends=[...addFriends, allBody.friends]
-    }
-    else if (allBody.deleteFriend===false && addFriends.some(e=>e.friendId===allBody.friends.friendId)){
-      addFriends = userData.dataValues.friends.filter(e=>e.friendId !== allBody.friends.friendId)
+    if(allBody.deleteFriend===false && !addFriends.some(e=>e===allBody.friends)){
       addFriends=[...addFriends, allBody.friends]
     }
     else if (allBody.deleteFriend===true){
-      addFriends = userData.dataValues.friends.filter(e=>e.friendId !== allBody.friends.friendId) 
+      addFriends = userData.dataValues.friends.filter(e=>e !== allBody.friends) 
     }
     
     await userData.update({
