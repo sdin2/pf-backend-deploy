@@ -112,9 +112,12 @@ router.put("/:id", async (req, res, next) => {
   const allBody = req.body;
   try {
     let forumData = await Answer.findByPk(id);
+    if(allBody.like){
+      allBody.like=[...forumData.like,allBody.like]
+    }
     await forumData.update({
       comment: allBody.comment,
-      like: [...forumData.like, allBody.like],
+      like:allBody.like,
       deleteFlag: allBody.deleteFlag,
     });
     res.json("Commentario editado correctamente");

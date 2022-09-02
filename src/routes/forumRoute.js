@@ -140,7 +140,7 @@ router.put("/:id", async (req, res, next) => {
     if (allBody.othersUsersLike){
       allBody.othersUsersLike=[...forumData.othersUsersLike,allBody.othersUsersLike]
     }
-    if (allBody.report){
+    if (allBody.report && !forumData.some(f=>f.report===allBody.report)){
       allBody.report=[...forumData.report, allBody.report]
     }
     console.log(forumData)
