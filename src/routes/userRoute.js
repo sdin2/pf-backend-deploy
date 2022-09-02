@@ -136,7 +136,7 @@ router.put("/:id", async (req, res, next) => {
     else if (deleteFriend===true){
       addFriends = userData.dataValues.friends.filter(e=>e !== allBody.friends) 
     }
-    
+    console.log(deleteFriend,allBody.friends)
     await userData.update({
       friends : addFriends,
       nickname: allBody.nickname,
