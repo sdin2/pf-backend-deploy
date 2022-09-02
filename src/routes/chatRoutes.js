@@ -51,8 +51,8 @@ router.put("/:id", async (req, res, next) => {
         messages: allBody.messages,
       },
     ];
-    let chat = [...chatData.dataValue.messages, userChat];
-    console.log(chatData.dataValue.messages)
+    let chat = [...chatData.messages, userChat];
+    console.log(chatData.messages)
     await chatData.update({
       messages: chat,
       deleteFlag: allBody.deleteFlag,
