@@ -130,10 +130,10 @@ router.put("/:id", async (req, res, next) => {
         (e) => e !== allBody.favorite
       );
     }
-    if(deleteFriend==false && !addFriends.some(e=>e===allBody.friends)){
+    if(deleteFriend=="no" && !addFriends.some(e=>e===allBody.friends)){
       addFriends=[...addFriends, allBody.friends]
     }
-    else if (deleteFriend==true){
+    else if (deleteFriend=="yes"){
       addFriends = userData.dataValues.friends.filter(e=>e !== allBody.friends) 
     }
 
