@@ -115,6 +115,8 @@ router.get("/:id", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   const id = req.params.id;
   const allBody = req.body;
+  const deleteFriend = req.query.deleteFriend
+
   try {
     let userData = await User.findByPk(id);
     let addFriends=userData.dataValues.friends
@@ -128,10 +130,10 @@ router.put("/:id", async (req, res, next) => {
         (e) => e !== allBody.favorite
       );
     }
-    if(allBody.deleteFriend===false && !addFriends.some(e=>e===allBody.friends)){
+    if(deleteFriend===false && !addFriends.some(e=>e===allBody.friends)){
       addFriends=[...addFriends, allBody.friends]
     }
-    else if (allBody.deleteFriend===true){
+    else if (deleteFriend===true){
       addFriends = userData.dataValues.friends.filter(e=>e !== allBody.friends) 
     }
     
