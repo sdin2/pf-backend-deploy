@@ -114,7 +114,7 @@ router.put("/:id", async (req, res, next) => {
     let forumData = await Answer.findByPk(id);
     await forumData.update({
       comment: allBody.comment,
-      like: [...like, allBody.like],
+      like: [...forumData.like, allBody.like],
       deleteFlag: allBody.deleteFlag,
     });
     res.json("Commentario editado correctamente");
