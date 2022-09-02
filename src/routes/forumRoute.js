@@ -137,13 +137,19 @@ router.put("/:id", async (req, res, next) => {
   console.log(allBody)
   try {
     let forumData = await Forum.findByPk(id);
+    if (allBody.othersUsersLike){
+      allBody.othersUsersLike=[...forumData.othersUsersLike,allBody.othersUsersLike]
+    }
+    if (allBody.report){
+      allBody.report=[...forumData.report, allBody.report]
+    }
     console.log(forumData)
     await forumData.update({
       title: allBody.title,
       text: allBody.text,
       deleteFlag: allBody.deleteFlag,
-      othersUsersLike: [...forumData.othersUsersLike, allBody.othersUsersLike],
-      report: [...forumData.report, allBody.report],
+      othersUsersLike: allBody.othersUsersLike,
+      report: allBody.report,
       users_response: allBody.users_response,
     });
     res.send("Posteo editado correctamente");
