@@ -120,6 +120,7 @@ router.put("/:id", async (req, res, next) => {
   try {
     let userData = await User.findByPk(id);
     let addFriends=userData.dataValues.friends
+    console.log(userData)
     if (
       allBody.delete == false &&
       !userData.favoriteGames.some((e) => e === allBody.favorite)
