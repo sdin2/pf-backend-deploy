@@ -44,7 +44,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   const { id } = req.params;
   const newsData = req.body;
   console.log(newsData)
