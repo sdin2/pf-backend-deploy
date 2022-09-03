@@ -29,7 +29,7 @@ const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
 const socketServerIo = http.createServer(server);
 const io = new Server(socketServerIo, {
   cors: {
-    origin: "*",
+    origin: ["*","https://admin.socket.io/#/"]
   },
 });
 
