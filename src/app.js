@@ -11,7 +11,8 @@ const axios = require("axios");
 const { Server } = require("socket.io");
 const http = require("http");
 const cors = require("cors");
-const { instrument } = require("@socket.io/admin-ui");
+
+
 
 const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
 // server.use(cors);
@@ -29,7 +30,7 @@ const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
 const socketServerIo = http.createServer(server);
 const io = new Server(socketServerIo, {
   cors: {
-    origin: ["*","https://admin.socket.io/#/","https://admin.socket.io"]
+    origin: ["*"]
   },
 });
 
@@ -48,8 +49,6 @@ io.on("connection", (socket) => {
     socket.to(messege.room).emit("messegeFromBack", messege);
   });
 });
-
-instrument(io, {auth : false})
 /////////////////////////
 
 server.name = "API";
