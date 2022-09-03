@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
 
   socket.on("room",(room)=>{
     console.log(room);
-    socket.join(room)
+    socket.join(room.room)
   })
 
   socket.on("messege", (messege) => {
