@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
   });
 });
 
-instrumen(io, {auth : false})
+instrument(io, {auth : false})
 /////////////////////////
 
 server.name = "API";
