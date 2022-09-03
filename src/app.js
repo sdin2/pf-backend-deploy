@@ -40,6 +40,7 @@ io.on("connection", (socket) => {
     console.log(room);
     socket.join(room)
   });
+  
   socket.on("messege", (messege) => {
     console.log(messege);
     socket.to(room).emit("messegeFromBack", messege);
