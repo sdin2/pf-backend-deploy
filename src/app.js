@@ -36,14 +36,9 @@ io.on("connection", (socket) => {
   console.log("a user connected");
   console.log(socket.id);
   
-  socket.on("room", (room) => {
-    console.log(room);
-    socket.join(room)
-  });
-  
   socket.on("messege", (messege) => {
     console.log(messege);
-    socket.to(room).emit("messegeFromBack", messege);
+    socket.to(messege.room).emit("messegeFromBack", messege);
   });
 });
 /////////////////////////
