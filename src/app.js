@@ -38,6 +38,7 @@ io.on("connection", (socket) => {
 
   socket.on("room",(room)=>{
     console.log(room);
+    socket.disconect()
     socket.join(room.room)
     console.log("joined to room")
   })
