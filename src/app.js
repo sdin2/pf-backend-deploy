@@ -12,8 +12,6 @@ const { Server } = require("socket.io");
 const http = require("http");
 const cors = require("cors");
 
-
-
 const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
 // server.use(cors);
 
@@ -30,7 +28,7 @@ const stripe = new Stripe(process.env.SECRET_KEY_STRIPE);
 const socketServerIo = http.createServer(server);
 const io = new Server(socketServerIo, {
   cors: {
-    origin: ["*"]
+    origin: "*",
   },
 });
 
