@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { Chat, User } = require("../db.js");
 
+
 router.post("/", async (req, res, next) => {
   const chat = req.body;
   let idRoom = [chat.user1Id, chat.user2Id].sort().join("_");
@@ -21,6 +22,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+
 router.get("/", async (req, res, next) => {
   try {
     let chats = await Chat.findAll();
@@ -29,6 +31,7 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
 
 router.get("/:id", async (req, res, next) => {
   let id = req.params.id ? req.params.id : req.body.id;
@@ -39,6 +42,7 @@ router.get("/:id", async (req, res, next) => {
     console.log(error);
   }
 });
+
 
 router.put("/:id", async (req, res, next) => {
   const id = req.params.id ? req.params.id : req.body.id;

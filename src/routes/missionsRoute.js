@@ -4,16 +4,13 @@ const router = express.Router();
 const { Mission, User } = require("../db.js");
 
 router.post("/", async (req, res, next) => {
-  const { name, description, coinsRewards, nickname } = req.body;
+  const { name, description, coinsRewards, icon } = req.body;
   try {
-    let userDb = await User.findOne({
-      where: { nickname: nickname },
-    });
     Mission.create({
       name,
       description,
       coinsRewards,
-      userId: userDb.dataValues.id,
+      icon,
     });
     res.status(200).json("Mission created succesfuly!");
   } catch (error) {

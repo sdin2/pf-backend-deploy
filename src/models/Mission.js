@@ -27,5 +27,9 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    deleteFlag: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   });
 };
