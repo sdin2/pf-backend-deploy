@@ -52,7 +52,7 @@ router.put("/:id", async (req, res, next) => {
         createdAt: chatData.updatedAt,
       },
     ];
-    chatData.messages = [...chatData.messages, userChat];
+    chatData.messages = allBody.messages && allBody.userId ? [...chatData.messages, userChat]: [...chatData.messages];
     await chatData.update({
       messages: chatData.messages,
       deleteFlag: allBody.deleteFlag,
