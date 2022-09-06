@@ -45,10 +45,6 @@ router.get("/", async (req, res, next) => {
           model: Mission,
           attributes: ["id", "name", "completed", "coinsRewards"],
         },
-        // {
-        //   model: Chat,
-        //   attributes: ["deleteFlag", "messages", "id"],
-        // },
       ],
     });
     if (email) {
@@ -89,7 +85,7 @@ router.get("/:id", async (req, res, next) => {
         },
         {
           model: Mission,
-          attributes: ["id", "name", "completed", "coinsRewards"],
+          attributes: ["id", "name", "completed", "coinsRewards","icon"],
         },
         {model: Chat,
           attributes: ["id", "messages", "deleteFlag"]}

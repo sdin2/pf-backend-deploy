@@ -47,8 +47,8 @@ const { User, New, Game, Genre, Reward, Forum, Mission, Answer, Chat } =
 // Product.hasMany(Reviews);
 User.hasMany(Forum);
 Forum.belongsTo(User);
-User.hasMany(Mission);
-Mission.hasMany(User);
+Mission.belongsToMany(User, {through: "user_mission"});
+User.belongsToMany(Mission, {through: "user_mission"});
 Forum.hasMany(Answer);
 Answer.belongsTo(Forum);
 Answer.belongsTo(User);

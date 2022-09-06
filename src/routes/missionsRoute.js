@@ -29,7 +29,6 @@ router.get("/", async (req, res, next) => {
           "img",
           "deleteFlag",
           "bannedFlag",
-          "missionCompleted",
         ],
       },
     });
@@ -53,7 +52,6 @@ router.get("/:id", async (req, res, next) => {
           "img",
           "deleteFlag",
           "bannedFlag",
-          "missionCompleted",
         ],
       },
     });

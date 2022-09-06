@@ -72,6 +72,52 @@ server.use((req, res, next) => {
   next();
 });
 
+
+///////node mailer
+async function mainMail(name, email, subject, message) {
+	const transporter = await nodeMail.createTransport({
+		service: 'gmail',
+		auth: {
+			user: process.env.GMAIL_USER,
+			pass: process.env.PASSWORD,
+		},
+	});
+	const mailOption = {
+		from: process.env.GMAIL_USER,
+		to: process.env.EMAIL,
+		subject: subject,
+		html: `<b style='color: #006600'>User Contact</b>
+    <p>name: ${name}</p>
+    <p>email: ${email}</p>
+    <p>message: ${message}</p>`
+
+	};
+	try {
+		await transporter.sendMail(mailOption, function(err, info) {
+      if(err) {
+        console.log(err)
+      } else {
+        console.log(info)
+      }
+    });
+		res.send("Message Successfully Sent!");
+	} catch (error) {
+		return Promise.reject(error);
+	}
+}
+
+server.post('/contact', async (req, res) => {
+	const { name, email, subject, message } = req.body;
+	try {
+		await mainMail(name, email, subject, message);
+
+		res.send('Message Successfully Sent!');
+	} catch (error) {
+		res.send('Message Could not be Sent');
+	}
+});
+
+//////////////////stripe///////////////
 server.use("/", routes);
 server.post("/api/checkout", async (req, res) => {
   try {

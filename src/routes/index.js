@@ -11,6 +11,7 @@ const rewardRoute = require("./rewardRoute");
 const missionsRoute = require("./missionsRoute");
 const answersRoutes = require("./answersRoute");
 const chatRoutes = require("./chatRoutes");
+const addMissionToUserRoute = require("./addMissionToUserRoute")
 // const paymentRoute = require("./paymentRoute");
 
 router.use("/news", newsRoute);
@@ -22,6 +23,7 @@ router.use("/reward", rewardRoute);
 router.use("/missions", missionsRoute);
 router.use("/answers", answersRoutes);
 router.use("/chat", chatRoutes);
+router.use("/addMission", addMissionToUserRoute)
 // router.use("/payment", paymentRoute);
 
 module.exports = router;
