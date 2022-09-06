@@ -12,6 +12,8 @@ const missionsRoute = require("./missionsRoute");
 const answersRoutes = require("./answersRoute");
 const chatRoutes = require("./chatRoutes");
 const addMissionToUserRoute = require("./addMissionToUserRoute")
+const emailRoute = require('./emailRoute');
+
 // const paymentRoute = require("./paymentRoute");
 
 router.use("/news", newsRoute);
@@ -24,6 +26,7 @@ router.use("/missions", missionsRoute);
 router.use("/answers", answersRoutes);
 router.use("/chat", chatRoutes);
 router.use("/addMission", addMissionToUserRoute)
+router.use('/email', emailRoute);
 // router.use("/payment", paymentRoute);
 
 module.exports = router;
