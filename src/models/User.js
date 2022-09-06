@@ -87,5 +87,9 @@ module.exports = (sequelize) => {
       type: DataTypes.JSON,
       defaultValue: [],
     },
+    blockedUsers: {
+      type: DataTypes.JSON,
+      defaultValue: [],
+    },
   });
 };

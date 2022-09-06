@@ -112,11 +112,14 @@ router.put("/:id", async (req, res, next) => {
   const id = req.params.id;
   const allBody = req.body;
   const deleteFriend = req.query.deleteFriend
-
+  const blocked = req.body.blocked
   try {
+   
     let userData = await User.findByPk(id);
+   
     let addFriends=userData.dataValues.friends
-    console.log(userData)
+
+
     if (
       allBody.delete == false &&
       !userData.favoriteGames.some((e) => e === allBody.favorite)
@@ -127,12 +130,23 @@ router.put("/:id", async (req, res, next) => {
         (e) => e !== allBody.favorite
       );
     }
-    if(deleteFriend=="no" && !addFriends.some(e=>e===allBody.friends)){
-      addFriends=[...addFriends, allBody.friends]
-    }
-    else if (deleteFriend=="yes"){
-      addFriends = userData.dataValues.friends.filter(e=>e !== allBody.friends) 
-    }
+
+   
+      if(deleteFriend=="no" && !addFriends.some(e=>e===allBody.friends)){
+        addFriends=[...addFriends, allBody.friends]
+      }
+      else if (deleteFriend=="yes"){
+        addFriends = userData.dataValues.friends.filter(e=>e !== allBody.friends) 
+      }
+    
+
+
+      if (blocked=="yes"){
+        allBody.blockedUsers=[...userData.dataValues.blockedUsers,allBody.blockedUsers]
+      } else if (blocked=="no"){
+        allBody.blockedUsers= userData.dataValues.blockedUsers.filter(e=> e != allBody.blockedUsers)
+      }
+    
 
     await userData.update({
       friends : addFriends,
@@ -152,6 +166,7 @@ router.put("/:id", async (req, res, next) => {
       rating: allBody.rating,
       plan: allBody.plan,
       description: allBody.description,
+      blockedUsers:allBody.blockedUsers
     });
     res.status(200).json("user updated");
   } catch (error) {
