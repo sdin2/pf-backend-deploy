@@ -4,13 +4,14 @@ const router = express.Router();
 const { Mission, User } = require("../db.js");
 
 router.post("/", async (req, res, next) => {
-  const { name, description, coinsRewards, icon } = req.body;
+  const { name, description, coinsRewards, icon, route } = req.body;
   try {
     Mission.create({
       name,
       description,
       coinsRewards,
       icon,
+      route,
     });
     res.status(200).json("Mission created succesfuly!");
   } catch (error) {
@@ -70,6 +71,7 @@ router.put("/:id", async (req, res, next) => {
       name: allBody.name,
       description: allBody.description,
       coinsRewards: allBody.coinsRewards,
+      route: allBody.route,
     });
     res.json("Mission updated succesfuly!");
   } catch (error) {

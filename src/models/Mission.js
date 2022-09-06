@@ -31,5 +31,9 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    route: {
+      type: DataTypes.STRING,
+      defaultValue: "home",
+    },
   });
 };
