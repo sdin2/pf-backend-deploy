@@ -162,7 +162,7 @@ router.put("/:id", async (req, res, next) => {
       servers: allBody.servers,
       missionCompleted: allBody.missionCompleted,
       isAdmin: allBody.isAdmin,
-      isSuperAdmin: allBody.isAdmin,
+      isSuperAdmin: allBody.isSuperAdmin,
       rating: allBody.rating,
       plan: allBody.plan,
       description: allBody.description,
