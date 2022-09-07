@@ -146,8 +146,11 @@ router.put("/:id", async (req, res, next) => {
       } else if (blocked=="no"){
         allBody.blockedUsers= userData.dataValues.blockedUsers.filter(e=> e != allBody.blockedUsers)
       }
-    
-  
+      if(allBody.coins){
+          allBody.coins=allBody.coins + userData.dataValues.coins
+        }
+        console.log(userData.dataValues.coins)
+        
     await userData.update({
       friends : addFriends,
       nickname: allBody.nickname,
@@ -157,7 +160,7 @@ router.put("/:id", async (req, res, next) => {
       bannedFlag: allBody.bannedFlag,
       password: allBody.password,
       matched_users: allBody.matched_users,
-      // coins: userData.dataValues.coins + allBody.coins,
+      coins: allBody.coins,
       favoriteGames: userData.favoriteGames,
       servers: allBody.servers,
       missionCompleted: allBody.missionCompleted,
