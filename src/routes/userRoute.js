@@ -147,9 +147,8 @@ router.put("/:id", async (req, res, next) => {
         allBody.blockedUsers= userData.dataValues.blockedUsers.filter(e=> e != allBody.blockedUsers)
       }
       if(allBody.coins){
-          allBody.coins=allBody.coins + userData.dataValues.coins
+          allBody.coins=Number(allBody.coins) + Number(userData.dataValues.coins)
         }
-        console.log(userData.dataValues.coins)
         
     await userData.update({
       friends : addFriends,
