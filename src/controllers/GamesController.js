@@ -4,23 +4,13 @@ const { API_KEY_GAMES } = process.env;
 const { Game } = require("../db");
 
 async function getAllGames() {
-  let gamesAPI;
-  let url;
-  let array = [];
-  gamesAPI = await axios.get(
-    `https://api.rawg.io/api/games?key=${API_KEY_GAMES}`
-  );
-  let gamesFilter = gamesAPI.data.results.map((e) => {
-    return {
-      id: e.id,
-      name: e.name,
-      img: e.background_image,
-    };
-  });
-  array = [...array, ...gamesFilter];
-  for (let i = 1; i < 20; i++) {
-    url = gamesAPI.data.next;
-    gamesAPI = await axios.get(url);
+  try {
+    let gamesAPI;
+    let url;
+    let array = [];
+    gamesAPI = await axios.get(
+      `https://api.rawg.io/api/games?key=${API_KEY_GAMES}`
+    );
     let gamesFilter = gamesAPI.data.results.map((e) => {
       return {
         id: e.id,
@@ -29,13 +19,33 @@ async function getAllGames() {
       };
     });
     array = [...array, ...gamesFilter];
+    for (let i = 1; i < 20; i++) {
+      url = gamesAPI.data.next;
+      gamesAPI = await axios.get(url);
+      let gamesFilter = gamesAPI.data.results.map((e) => {
+        return {
+          id: e.id,
+          name: e.name,
+          img: e.background_image,
+        };
+      });
+      array = [...array, ...gamesFilter];
+    }
+    return array;
+    
+  } catch (error) {
+    console.log(error)
   }
-  return array;
 }
 
 async function getGamesDB() {
-  let gamesDB = await Game.findAll();
-  return gamesDB;
+  try {
+    let gamesDB = await Game.findAll();
+    return gamesDB;
+    
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 // async function getAllGames() {
@@ -46,17 +56,22 @@ async function getGamesDB() {
 // }
 
 async function saveAllGamesInDb() {
-  const allGames = await getAllGames();
-  allGames.forEach((e) => {
-    Game.findOrCreate({
-      where: {
-        name: e.name,
-        img: e.img,
-        id: e.id,
-      },
+  try {
+    const allGames = await getAllGames();
+    allGames.forEach((e) => {
+      Game.findOrCreate({
+        where: {
+          name: e.name,
+          img: e.img,
+          id: e.id,
+        },
+      });
     });
-  });
-  console.log("all games saved in data base");
+    console.log("all games saved in data base");
+    
+  } catch (error) {
+    
+  }
 }
 
 module.exports = {

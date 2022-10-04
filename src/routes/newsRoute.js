@@ -9,24 +9,34 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   const title = req.query.title;
-  let allNews = await getAllNews();
-  if (title) {
-    let newsTitle = allNews.filter((el) =>
-      el.title.toLowerCase().includes(title.toLowerCase())
-    );
-    newsTitle.length
-      ? res.status(200).json(newsTitle)
-      : res.status(200).json("No se encontraron resultados");
-  } else res.status(200).json(allNews);
+  try {
+    let allNews = await getAllNews();
+    if (title) {
+      let newsTitle = allNews.filter((el) =>
+        el.title.toLowerCase().includes(title.toLowerCase())
+      );
+      newsTitle.length
+        ? res.status(200).json(newsTitle)
+        : res.status(200).json("No se encontraron resultados");
+    } else res.status(200).json(allNews);
+    
+  } catch (error) {
+   console.log(error) 
+  }
 });
 
 router.get("/:id", async (req, res, next) => {
-  const id = req.params.id;
-  let allNews = await getAllNews();
-  let newsId = allNews.filter((e) => e.id == id);
-  newsId.length > 0
-    ? res.status(200).send(newsId)
-    : res.status(200).send("Not found");
+  try {
+    
+    const id = req.params.id;
+    let allNews = await getAllNews();
+    let newsId = allNews.filter((e) => e.id == id);
+    newsId.length > 0
+      ? res.status(200).send(newsId)
+      : res.status(200).send("Not found");
+  } catch (error) {
+    console.log(error)
+  }
 });
 
 router.post("/", async (req, res, next) => {

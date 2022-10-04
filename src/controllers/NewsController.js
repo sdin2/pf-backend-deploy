@@ -4,31 +4,46 @@ const { API_KEY } = process.env;
 const { New } = require("../db");
 
 async function getNewsApi() {
-  const newsApi = await axios.get(
-    `https://www.mmobomb.com/api1/latestnews?key=${API_KEY}`
-  );
-  const array = newsApi.data.map((e) => {
-    return {
-      id: e.id,
-      title: e.title,
-      short_description: e.short_description,
-      main_image: e.main_image,
-      article_content: e.article_content,
-    };
-  });
-  return array;
+  try {
+    const newsApi = await axios.get(
+      `https://www.mmobomb.com/api1/latestnews?key=${API_KEY}`
+    );
+    const array = newsApi.data.map((e) => {
+      return {
+        id: e.id,
+        title: e.title,
+        short_description: e.short_description,
+        main_image: e.main_image,
+        article_content: e.article_content,
+      };
+    });
+    return array;
+    
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 async function getNewsDB() {
-  let newsDB = await New.findAll();
-  return newsDB;
+  try {
+    let newsDB = await New.findAll();
+    return newsDB;
+    
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 async function getAllNews() {
-  const apiNews = await getNewsApi();
-  const DBNews = await getNewsDB();
-  const allNews = apiNews.concat(DBNews);
-  return allNews;
+  try {
+    const apiNews = await getNewsApi();
+    const DBNews = await getNewsDB();
+    const allNews = apiNews.concat(DBNews);
+    return allNews;
+    
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 module.exports = {
