@@ -58,7 +58,6 @@ async function getGamesDB() {
 async function saveAllGamesInDb() {
   try {
     const allGames = await getAllGames();
-    await Game.drop()
     allGames.forEach((e) => {
       Game.findOrCreate({
         where: {
