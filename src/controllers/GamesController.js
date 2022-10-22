@@ -71,6 +71,8 @@ async function saveAllGamesInDb() {
     
   } catch (error) {
     
+    console.log(error)
+    
   }
 }
 
