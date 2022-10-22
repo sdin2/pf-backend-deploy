@@ -57,7 +57,6 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   const { id } = req.params;
   const newsData = req.body;
-  console.log(newsData)
   try {
     let newData = await New.findByPk(id);
     console.log(newData)

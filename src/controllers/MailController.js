@@ -3,6 +3,7 @@ require('dotenv').config();
 const nodeMail = require('nodemailer');
 
 async function contactMail(name, email, subject, message) {
+try {
 	const transporter = await nodeMail.createTransport({
 		host: 'smtp.gmail.com',
 		port: 465,
@@ -21,7 +22,7 @@ async function contactMail(name, email, subject, message) {
      ${name}
      ${message}`,
 	};
-	try {
+	
 		await transporter.sendMail(mailOption);
 		return Promise.resolve('Message Sent Successfully!');
 	} catch (error) {
