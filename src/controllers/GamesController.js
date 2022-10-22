@@ -58,6 +58,9 @@ async function getGamesDB() {
 async function saveAllGamesInDb() {
   try {
     const allGames = await getAllGames();
+    await Game.destroy({
+      where:{}
+    })
     allGames.forEach((e) => {
       Game.findOrCreate({
         where: {
