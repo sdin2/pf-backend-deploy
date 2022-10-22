@@ -61,16 +61,15 @@ async function saveAllGamesInDb() {
     allGames.forEach((e) => {
       Game.findOrCreate({
         where: {
+          id: e.id,
           name: e.name,
           img: e.img,
-          id: e.id,
         },
       });
     });
     console.log("all games saved in data base");
     
   } catch (error) {
-    
     console.log(error)
     
   }
